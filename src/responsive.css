@@ -83,6 +83,56 @@ img, svg, video, canvas, audio, iframe, embed, object {
 /* ── MOBILE: Stack hero cards vertically so internship card
       does NOT overlap the academic workspace card ── */
 @media (max-width: 600px) {
+  /* Hero section: single-column, copy on top, visual below */
+  .hero {
+    padding-top: 100px !important;
+    padding-bottom: 40px !important;
+    gap: 28px !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Copy column: full width, centered */
+  .hero-copy {
+    max-width: 100% !important;
+    text-align: left !important;
+  }
+  .hero-copy h1 {
+    font-size: clamp(36px, 10.5vw, 50px) !important;
+    max-width: 100% !important;
+    margin: 8px 0 14px !important;
+  }
+  .hero-copy > p {
+    font-size: clamp(15px, 4vw, 17px) !important;
+    max-width: 100% !important;
+    line-height: 1.55 !important;
+  }
+
+  /* CTA buttons: stack vertically, touch-friendly */
+  .hero-actions {
+    flex-direction: column !important;
+    gap: 10px !important;
+    margin-top: 20px !important;
+    align-items: stretch !important;
+  }
+  .hero-actions .button {
+    width: 100% !important;
+    min-height: 50px !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  /* Trust badges: wrap naturally */
+  .hero-chips {
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    margin-top: 16px !important;
+  }
+  .hero-chips span {
+    font-size: 12px !important;
+    min-height: 30px !important;
+    padding: 0 10px !important;
+  }
+
   /* Turn the hero visual into a vertical column */
   .hero-visual {
     display: flex !important;
@@ -93,6 +143,9 @@ img, svg, video, canvas, audio, iframe, embed, object {
     transform: none !important;      /* cancel the scale() applied at ≤560px */
     margin-bottom: 0 !important;
     overflow: visible !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
 
   /* Browser / Academic Workspace card: full width, static */
@@ -303,44 +356,150 @@ img, svg, video, canvas, audio, iframe, embed, object {
 }
 
 /* ══════════════════════════════════════════════════════════════
-   7. MENTORS SECTION
+   7. MENTORS SECTION – CINEMATIC HERO + PROFILE CARDS
    ══════════════════════════════════════════════════════════════ */
 
-@media (max-width: 480px) {
+/* ── FOUNDERS / CINEMATIC HERO BANNER ──
+   Reduce height, fix gradient, reposition background image
+   so the face/whiteboard area stays in frame on mobile.
+   ── */
+@media (max-width: 600px) {
+  .mentor-cinematic-section {
+    padding: 44px 0 40px !important;
+  }
   .mentor-cinematic-hero {
-    min-height: 320px !important;
+    min-height: 290px !important;
+    border-radius: 18px !important;
+  }
+  /* Bring face/important area into frame */
+  .mentor-cinematic-hero > img {
+    object-position: 68% 22% !important;
+  }
+  /* Stronger bottom-up gradient so white text is always readable */
+  .mentor-cinematic-hero::after {
+    background: linear-gradient(
+      180deg,
+      rgba(8,8,8,.50) 0%,
+      rgba(8,8,8,.82) 42%,
+      rgba(8,8,8,.97) 100%
+    ) !important;
+  }
+  /* Copy anchored to bottom */
+  .mentor-hero-copy {
+    width: 100% !important;
+    align-self: end !important;
+    padding: 22px 18px !important;
+  }
+  .mentor-hero-badge {
+    min-height: 30px !important;
+    padding-inline: 10px !important;
+    font-size: 11px !important;
   }
   .mentor-hero-copy h2 {
-    font-size: clamp(26px, 8vw, 34px) !important;
+    margin: 10px 0 8px !important;
+    font-size: clamp(26px, 8.5vw, 38px) !important;
+    line-height: 1.08 !important;
+  }
+  .mentor-hero-copy p {
+    font-size: 14px !important;
+    line-height: 1.45 !important;
+  }
+}
+
+/* ── MENTOR PROFILE CARDS ──
+   Two-column layout (photo | info) is correct on mobile,
+   but photo is too tall. Fix with aspect-ratio instead of min-height.
+   ── */
+@media (max-width: 600px) {
+  .mentor-profile-grid {
+    gap: 14px !important;
   }
   .mentor-profile-card {
-    grid-template-columns: 80px minmax(0,1fr) !important;
-    gap: 10px !important;
+    min-height: 0 !important;
+    grid-template-columns: 100px minmax(0, 1fr) !important;
+    gap: 13px !important;
     padding: 14px !important;
+    border-radius: 18px !important;
+    align-items: start !important;
   }
   .mentor-profile-photo {
-    min-height: 180px !important;
+    /* Replace tall min-height with a portrait aspect-ratio */
+    min-height: 0 !important;
+    height: auto !important;
+    aspect-ratio: 3 / 4 !important;
     border-radius: 12px !important;
+    overflow: hidden !important;
+  }
+  .mentor-profile-photo img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center 18% !important;
+  }
+  .mentor-profile-role {
+    padding: 4px 8px !important;
+    font-size: 9px !important;
+  }
+  .mentor-profile-content h3 {
+    margin: 8px 0 5px !important;
+    font-size: 17px !important;
+    overflow-wrap: anywhere !important;
+  }
+  .mentor-profile-content p {
+    font-size: 12px !important;
+    line-height: 1.4 !important;
   }
   .mentor-profile-tags {
     flex-wrap: wrap !important;
     gap: 4px !important;
+    margin: 8px 0 !important;
   }
   .mentor-profile-tags span {
-    font-size: 10px !important;
+    font-size: 9px !important;
     padding: 3px 7px !important;
+    white-space: normal !important;
+  }
+  .mentor-cinematic-section .mentor-request {
+    min-height: 36px !important;
+    font-size: 12px !important;
+    border-radius: 10px !important;
   }
   .mentor-value-strip {
     grid-template-columns: 1fr 1fr !important;
+    gap: 14px 0 !important;
+    padding-top: 4px !important;
+  }
+  .mentor-value-icon {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 10px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .mentor-cinematic-hero {
+    min-height: 260px !important;
+  }
+  .mentor-hero-copy h2 {
+    font-size: clamp(24px, 8vw, 34px) !important;
+  }
+  .mentor-profile-card {
+    grid-template-columns: 86px minmax(0, 1fr) !important;
+    gap: 11px !important;
+    padding: 12px !important;
   }
 }
 
 @media (max-width: 360px) {
   .mentor-profile-card {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: 76px minmax(0, 1fr) !important;
+    padding: 11px !important;
   }
-  .mentor-profile-photo {
-    min-height: 160px !important;
+  .mentor-profile-content h3 {
+    font-size: 15px !important;
+  }
+  .mentor-profile-content p {
+    font-size: 11px !important;
   }
 }
 
@@ -606,16 +765,6 @@ img, svg, video, canvas, audio, iframe, embed, object {
 @media (min-width: 601px) and (max-width: 800px) {
   .two-plan-grid {
     grid-template-columns: 1fr 1fr !important;
-  }
-}
-
-/* Tablet: mentor section */
-@media (min-width: 600px) and (max-width: 900px) {
-  .mentor-profiles-grid {
-    grid-template-columns: 1fr !important;
-  }
-  .mentor-profile-card {
-    grid-template-columns: 100px minmax(0,1fr) !important;
   }
 }
 
