@@ -68,60 +68,62 @@ img, svg, video, canvas, audio, iframe, embed, object {
 }
 
 /* ══════════════════════════════════════════════════════════════
-   3. HERO SECTION – INTERNSHIP CARD MOBILE STACK FIX
+   3. HERO SECTION – PREMIUM MOBILE COMPOSITION
+      Inspired by the desktop two-layer floating composition:
+      workspace card with subtle tilt + internship card overlapping
+      the lower-right corner, anchored by flex + negative margin.
    ══════════════════════════════════════════════════════════════ */
 
-/* Internship float card: keep inside viewport on all sizes */
+/* Global constraint: internship float never causes horizontal scroll */
 .internship-float {
   max-width: min(280px, calc(100vw - 32px));
   box-sizing: border-box;
 }
-.internship-float article {
-  min-height: 0;
-}
+.internship-float article { min-height: 0; }
 
-/* ── MOBILE: Stack hero cards vertically so internship card
-      does NOT overlap the academic workspace card ── */
+/* ── MOBILE: Premium layered hero ── */
 @media (max-width: 600px) {
-  /* Hero section: single-column, copy on top, visual below */
+
+  /* ── 1. Hero section: single-column ── */
   .hero {
     padding-top: 100px !important;
-    padding-bottom: 40px !important;
-    gap: 28px !important;
+    padding-bottom: 48px !important;
+    gap: 32px !important;
     grid-template-columns: 1fr !important;
   }
 
-  /* Copy column: full width, centered */
+  /* ── 2. Copy block ── */
   .hero-copy {
     max-width: 100% !important;
-    text-align: left !important;
   }
   .hero-copy h1 {
-    font-size: clamp(36px, 10.5vw, 50px) !important;
+    font-size: clamp(38px, 11vw, 54px) !important;
     max-width: 100% !important;
-    margin: 8px 0 14px !important;
+    margin: 10px 0 16px !important;
+    line-height: 1.03 !important;
+    letter-spacing: -.03em !important;
   }
   .hero-copy > p {
-    font-size: clamp(15px, 4vw, 17px) !important;
+    font-size: clamp(15px, 4.2vw, 17px) !important;
     max-width: 100% !important;
-    line-height: 1.55 !important;
+    line-height: 1.56 !important;
   }
 
-  /* CTA buttons: stack vertically, touch-friendly */
+  /* CTA buttons: stacked, full-width, touch-friendly */
   .hero-actions {
     flex-direction: column !important;
     gap: 10px !important;
-    margin-top: 20px !important;
+    margin-top: 22px !important;
     align-items: stretch !important;
   }
   .hero-actions .button {
     width: 100% !important;
-    min-height: 50px !important;
+    min-height: 52px !important;
     justify-content: center !important;
     text-align: center !important;
   }
 
-  /* Trust badges: wrap naturally */
+  /* Trust badges: compact, wrap */
   .hero-chips {
     flex-wrap: wrap !important;
     gap: 6px !important;
@@ -133,44 +135,51 @@ img, svg, video, canvas, audio, iframe, embed, object {
     padding: 0 10px !important;
   }
 
-  /* Turn the hero visual into a vertical column */
+  /* ── 3. Hero visual: flex column, overflow visible for the
+            floating internship card that extends below ── */
   .hero-visual {
     display: flex !important;
     flex-direction: column !important;
     align-items: stretch !important;
-    gap: 12px !important;
+    gap: 0 !important;              /* gap controlled by negative margin below */
     min-height: 0 !important;
-    transform: none !important;      /* cancel the scale() applied at ≤560px */
+    transform: none !important;    /* cancel scale() from polish.css ≤560px */
     margin-bottom: 0 !important;
-    overflow: visible !important;
+    overflow: visible !important;  /* allow internship card to extend below */
     width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    position: relative !important;
   }
 
-  /* ── Academic Workspace card: full width, properly sized ── */
+  /* ── 4. Academic Workspace card: full-width with subtle 3D tilt ── */
   .browser-card {
     position: relative !important;
     top: auto !important;
     right: auto !important;
     width: 100% !important;
     min-height: 0 !important;
-    transform: none !important;
     animation: none !important;
-    border-radius: 16px !important;
+    border-radius: 20px !important;
+    /* Subtle desktop-style tilt + depth shadow */
+    transform: perspective(1600px) rotate(1.5deg) !important;
+    transform-origin: top center !important;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.09),
+      0 28px 64px rgba(0,0,0,0.70),
+      0 8px 22px rgba(0,0,0,0.45) !important;
+    z-index: 2 !important;
   }
 
-  /* Increase workspace internal padding and text sizes */
+  /* Workspace: larger internal text so it reads as a real dashboard */
   .browser-body {
-    padding: 20px !important;
+    padding: 20px 20px 22px !important;
   }
   .browser-body h3 {
-    font-size: clamp(22px, 6.5vw, 30px) !important;
-    margin: 8px 0 16px !important;
-    line-height: 1.18 !important;
+    font-size: clamp(23px, 6.8vw, 32px) !important;
+    margin: 8px 0 18px !important;
+    line-height: 1.16 !important;
   }
   .browser-body nav {
-    gap: clamp(14px, 5vw, 22px) !important;
+    gap: clamp(14px, 5vw, 24px) !important;
     padding-bottom: 10px !important;
   }
   .browser-body nav > * {
@@ -190,64 +199,91 @@ img, svg, video, canvas, audio, iframe, embed, object {
     width: 34px !important;
     height: 34px !important;
   }
-  .mock-content b {
-    font-size: 13px !important;
-  }
-  .mock-content small {
-    font-size: 11px !important;
-    margin-top: 2px !important;
-  }
-  .mock-kicker {
-    font-size: 10px !important;
-    letter-spacing: .08em !important;
-  }
+  .mock-content b   { font-size: 13px !important; }
+  .mock-content small { font-size: 11px !important; margin-top: 2px !important; }
+  .mock-kicker { font-size: 10px !important; letter-spacing: .08em !important; }
 
-  /* Internship Opportunities card: static, full width, below browser card */
+  /* ── 5. Internship Opportunities: floating overlap ──
+     Pull the card UP by negative margin so it overlaps the
+     bottom-right of the workspace card — mirrors the desktop.
+     align-self: flex-end right-aligns it inside the flex column.
+  ── */
   .opportunity-float {
     position: relative !important;
     top: auto !important;
     right: auto !important;
     bottom: auto !important;
     left: auto !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
+    align-self: flex-end !important;        /* right side of the flex column */
+    margin-top: -72px !important;           /* overlap workspace bottom by 72px */
+    width: min(276px, 88%) !important;
+    max-width: none !important;
     animation: none !important;
-    border-radius: 12px !important;
-    padding: 14px 16px !important;
+    border-radius: 15px !important;
+    padding: 13px 15px !important;
+    z-index: 10 !important;
+    /* Elevated shadow — like the desktop floating card */
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.10),
+      0 20px 52px rgba(0,0,0,0.70),
+      0 6px 16px rgba(0,0,0,0.50) !important;
   }
 
-  /* Roadmap float: hide on mobile (too cramped) */
-  .roadmap-float {
-    display: none !important;
+  /* Internship card text: clean and readable */
+  .opps-head { margin-bottom: 6px !important; }
+  .opps-head span { font-size: 10px !important; letter-spacing: .07em !important; }
+  .opps-head b    { font-size: 11px !important; }
+  .opportunity-float article {
+    min-height: 40px !important;
+    gap: 8px !important;
+    border-top-color: rgba(255,255,255,0.08) !important;
   }
-
-  /* Glows: scale down and reposition */
-  .glow-one { width: 160px !important; height: 160px !important; top: 20px !important; right: 20px !important; }
-  .glow-two { width: 120px !important; height: 120px !important; bottom: 10px !important; left: 10px !important; }
-
-  /* Internship card text sizes on mobile */
-  .opps-head span { font-size: 10px !important; }
-  .opps-head b { font-size: 11px !important; }
-  .opportunity-float article { min-height: 40px !important; gap: 8px !important; }
-  .opportunity-logo { width: 26px !important; height: 26px !important; font-size: 11px !important; border-radius: 7px !important; }
-  .opportunity-float b { font-size: 13px !important; }
+  .opportunity-logo {
+    width: 26px !important;
+    height: 26px !important;
+    font-size: 11px !important;
+    border-radius: 7px !important;
+    flex-shrink: 0 !important;
+  }
+  .opportunity-float b     { font-size: 13px !important; }
   .opportunity-float small { font-size: 11px !important; }
   .opportunity-note { display: none !important; }
+
+  /* Roadmap float: not shown on mobile */
+  .roadmap-float { display: none !important; }
+
+  /* Ambient glows: scaled down, repositioned for single-column */
+  .glow-one {
+    width: 220px !important; height: 220px !important;
+    top: 30px !important; right: -20px !important;
+    opacity: .55 !important;
+  }
+  .glow-two {
+    width: 160px !important; height: 160px !important;
+    bottom: 100px !important; left: -10px !important;
+    opacity: .45 !important;
+  }
 }
 
+/* ── Narrow 360px: reduce overlap so float doesn't cover content ── */
 @media (max-width: 360px) {
   .hero-copy h1 {
-    font-size: clamp(32px, 10vw, 40px) !important;
+    font-size: clamp(34px, 10.5vw, 44px) !important;
   }
-  .opportunity-float {
-    padding: 11px 13px !important;
+  .browser-card {
+    transform: perspective(1400px) rotate(1deg) !important; /* tighter tilt */
+    border-radius: 16px !important;
   }
   .browser-body {
     padding: 16px !important;
   }
   .browser-body h3 {
-    font-size: clamp(20px, 6vw, 26px) !important;
+    font-size: clamp(20px, 6.5vw, 26px) !important;
+  }
+  .opportunity-float {
+    margin-top: -55px !important;           /* slightly less overlap at 360px */
+    width: min(250px, 90%) !important;
+    padding: 11px 13px !important;
   }
 }
 
