@@ -1,0 +1,612 @@
+/* ============================================================
+   B.TECH MAKER – RESPONSIVE COMPLETENESS LAYER
+   Loaded after theme-fix.css. Covers all gaps found in audit:
+   - theme-fix.css had zero media queries
+   - 320–480px narrow mobile fixes missing
+   - Brand showcase, suggestion textarea, success state mobile
+   - Nav on small screens
+   - Hero section mobile refinements
+   - About cards at 320px
+   - Registration form on small screens
+   - Footer on very narrow viewports
+   ============================================================ */
+
+/* ══════════════════════════════════════════════════════════════
+   0. BASE: Prevent horizontal overflow on every screen size
+   ══════════════════════════════════════════════════════════════ */
+html, body {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+img, svg, video, canvas, audio, iframe, embed, object {
+  max-width: 100%;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   1. PERFORMANCE: Lazy-load below-fold images, reduced motion
+   ══════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .brand-showcase,
+  .bs-glow,
+  .bs-p,
+  .bs-tile,
+  .arc-card,
+  .internship-float {
+    animation: none !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   2. NAVIGATION – All sizes
+   ══════════════════════════════════════════════════════════════ */
+
+/* Prevent nav from causing horizontal scroll at any width */
+.site-nav, .nav {
+  max-width: 100vw;
+  box-sizing: border-box;
+}
+.nav-inner {
+  overflow: hidden;
+}
+
+/* Join Early Access button: prevent text overflow on 320px */
+@media (max-width: 400px) {
+  .nav-inner .button {
+    font-size: 11px !important;
+    padding: 0 10px !important;
+    min-height: 34px !important;
+  }
+  .logo b {
+    font-size: 13px !important;
+  }
+  .logo-mark {
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 14px !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   3. HERO SECTION
+   ══════════════════════════════════════════════════════════════ */
+
+/* Internship float card: keep inside viewport on all sizes */
+.internship-float {
+  max-width: min(280px, calc(100vw - 32px));
+  box-sizing: border-box;
+}
+.internship-float article {
+  min-height: 0;
+}
+
+@media (max-width: 480px) {
+  .internship-float {
+    width: min(240px, 82vw) !important;
+    right: 4px !important;
+    bottom: 4px !important;
+    padding: 10px 11px !important;
+    font-size: 11px;
+  }
+  .internship-float .opps-head span {
+    font-size: 9px;
+  }
+  .opportunity-note {
+    display: none; /* hide tiny disclaimer on small screens */
+  }
+}
+
+@media (max-width: 360px) {
+  .internship-float {
+    width: min(220px, 80vw) !important;
+    right: 2px !important;
+    padding: 8px 10px !important;
+  }
+  .hero-copy h1 {
+    font-size: clamp(32px, 10vw, 40px) !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   4. ABOUT SECTION – ARC CARDS ON NARROW MOBILE
+   ══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 480px) {
+  /* Arc hub orbits: scale down on small screens */
+  .arc-hub-orbits {
+    width: 360px !important;
+    transform-origin: center bottom;
+    scale: .82;
+  }
+  /* About arc section heading */
+  .about-arc-heading h2 {
+    font-size: clamp(28px, 8vw, 36px) !important;
+  }
+  /* Improve card readability */
+  .arc-card-front strong {
+    font-size: 13px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .arc-hub-orbits {
+    scale: .70;
+  }
+  /* About cards: 2-col grid stays but tighten */
+  .about-arc-visual .arc-card {
+    flex-basis: min(74vw, 220px) !important;
+    width: min(74vw, 220px) !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   5. FEATURES / PILLAR SECTION – TABLET / NARROW
+   ══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 600px) {
+  .features-layout {
+    grid-template-columns: 1fr !important;
+  }
+  .pillar-item {
+    min-height: 0 !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   6. GUIDANCE / AI SECTION
+   ══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 480px) {
+  .ai-guidance-section {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+  .ai-guidance-copy h2 {
+    font-size: clamp(28px, 8.5vw, 38px) !important;
+  }
+  .ai-guidance-action {
+    min-height: 72px !important;
+  }
+  .ai-feature-stage {
+    min-height: 240px !important;
+  }
+  .ai-desk-frame {
+    min-height: 0 !important;
+    aspect-ratio: 1.4 !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   7. MENTORS SECTION
+   ══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 480px) {
+  .mentor-cinematic-hero {
+    min-height: 320px !important;
+  }
+  .mentor-hero-copy h2 {
+    font-size: clamp(26px, 8vw, 34px) !important;
+  }
+  .mentor-profile-card {
+    grid-template-columns: 80px minmax(0,1fr) !important;
+    gap: 10px !important;
+    padding: 14px !important;
+  }
+  .mentor-profile-photo {
+    min-height: 180px !important;
+    border-radius: 12px !important;
+  }
+  .mentor-profile-tags {
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+  }
+  .mentor-profile-tags span {
+    font-size: 10px !important;
+    padding: 3px 7px !important;
+  }
+  .mentor-value-strip {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .mentor-profile-card {
+    grid-template-columns: 1fr !important;
+  }
+  .mentor-profile-photo {
+    min-height: 160px !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   8. PRICING SECTION
+   ══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 480px) {
+  .plans-heading h2 {
+    font-size: clamp(28px, 8vw, 36px) !important;
+  }
+  .plan-card {
+    padding: 20px 18px !important;
+  }
+  .plan-price {
+    font-size: clamp(36px, 11vw, 50px) !important;
+  }
+  .billing {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  .billing button {
+    width: 100% !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   9. REGISTRATION SECTION – COMPREHENSIVE MOBILE FIX
+   ══════════════════════════════════════════════════════════════ */
+
+/* Ensure label text is always visible in both themes */
+.registration-grid label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+
+/* Input fields: prevent zoom on iOS (font-size must be >= 16px) */
+.final-panel input,
+.final-panel textarea,
+.final-panel select {
+  font-size: 16px !important; /* prevents iOS zoom on focus */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Suggestion textarea: comfortable on all sizes */
+@media (max-width: 800px) {
+  .registration-suggestion {
+    margin-top: 4px;
+  }
+  .final-panel textarea {
+    min-height: 90px;
+  }
+}
+
+/* On mobile: full-width form, showcase below */
+@media (max-width: 800px) {
+  .final-panel {
+    padding: 32px 24px !important;
+  }
+  .registration-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .bs-tile {
+    width: 190px !important;
+    height: 190px !important;
+  }
+}
+
+/* On narrow mobile: single-column form fields */
+@media (max-width: 480px) {
+  .final-panel {
+    padding: 28px 18px !important;
+    border-radius: 20px !important;
+  }
+  .final-panel h2 {
+    font-size: clamp(28px, 8.5vw, 36px) !important;
+  }
+  .registration-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  .registration-grid .registration-email {
+    grid-column: auto !important;
+  }
+  .registration-suggestion {
+    grid-column: auto !important;
+  }
+  .suggestion-label-row {
+    font-size: 12px !important;
+  }
+  .char-counter {
+    font-size: 10.5px !important;
+  }
+  /* Success screen */
+  .registration-success {
+    flex-direction: column !important;
+    gap: 10px !important;
+    padding: 16px 18px !important;
+  }
+  .registration-success b {
+    font-size: 14px !important;
+  }
+  .registration-success small {
+    font-size: 12.5px !important;
+  }
+}
+
+/* Brand showcase at all mobile sizes */
+@media (max-width: 480px) {
+  .brand-showcase {
+    padding: 20px 12px !important;
+    gap: 20px !important;
+    max-width: 280px !important;
+  }
+  .bs-tile {
+    width: 160px !important;
+    height: 160px !important;
+    border-radius: 26px !important;
+    gap: 8px !important;
+    padding: 18px 16px 16px !important;
+  }
+  .bs-logo-mark {
+    width: 52px !important;
+    height: 52px !important;
+    font-size: 30px !important;
+    border-radius: 13px !important;
+  }
+  .bs-brand-name  { font-size: 12px !important; }
+  .bs-tile-tagline { font-size: 10px !important; }
+  .bs-eyebrow     { font-size: 9px !important; letter-spacing: .10em !important; }
+  .bs-headline    { font-size: 15px !important; }
+  .bs-subline     { font-size: 12px !important; }
+  .bs-glow        { width: 200px !important; height: 200px !important; }
+  /* Hide all particles on small mobile – performance + no overflow */
+  .bs-p { display: none !important; }
+}
+
+@media (max-width: 360px) {
+  .brand-showcase {
+    max-width: 240px !important;
+  }
+  .bs-tile {
+    width: 140px !important;
+    height: 140px !important;
+  }
+  .bs-logo-mark {
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 26px !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   10. FOUNDING TEAM SECTION
+   ══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 480px) {
+  .founding-inner {
+    padding: 28px 0 !important;
+    gap: 16px !important;
+  }
+  .founding-inner h2 {
+    font-size: clamp(24px, 7.5vw, 32px) !important;
+  }
+  .founding-people {
+    gap: 10px !important;
+  }
+  .founding-people article {
+    padding: 14px !important;
+    border-radius: 14px !important;
+    min-height: 0 !important;
+  }
+  .founding-people article > span {
+    width: 38px !important;
+    height: 38px !important;
+    font-size: 10px !important;
+  }
+  .founding-people b {
+    font-size: 14px !important;
+  }
+  .founding-people em {
+    font-size: 10px !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   11. FOOTER
+   ══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 480px) {
+  .footer-inner {
+    gap: 24px !important;
+    padding: 32px 0 !important;
+  }
+  .footer-links {
+    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+    gap: 16px 10px !important;
+  }
+  .footer-disclaimer {
+    padding-bottom: 76px !important;
+    font-size: 10px !important;
+  }
+  .footer-disclaimer p {
+    font-size: 10px !important;
+    line-height: 1.4 !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .footer-links {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   12. MODAL (Privacy / Terms) ON MOBILE
+   ══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 480px) {
+  .legal-modal {
+    padding: 20px 18px !important;
+    border-radius: 16px 16px 0 0 !important;
+  }
+  .legal-copy p {
+    font-size: 13px !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   13. TOAST NOTIFICATION
+   ══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 480px) {
+  .toast {
+    right: 8px !important;
+    left: 8px !important;
+    max-width: calc(100vw - 16px) !important;
+    font-size: 13px !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   14. TABLET: 600–1024px REFINEMENTS
+   ══════════════════════════════════════════════════════════════ */
+
+/* Tablet: ensure registration section is well spaced */
+@media (min-width: 600px) and (max-width: 1024px) {
+  .final-panel {
+    gap: 40px !important;
+  }
+  .bs-tile {
+    width: 200px !important;
+    height: 200px !important;
+  }
+  .registration-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+/* Tablet: plans side by side until they don't fit */
+@media (min-width: 601px) and (max-width: 800px) {
+  .two-plan-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+/* Tablet: mentor section */
+@media (min-width: 600px) and (max-width: 900px) {
+  .mentor-profiles-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .mentor-profile-card {
+    grid-template-columns: 100px minmax(0,1fr) !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   15. DESKTOP WIDESCREEN: 1600px–2560px
+   ══════════════════════════════════════════════════════════════ */
+
+@media (min-width: 1600px) {
+  .section-shell {
+    max-width: 1360px !important;
+  }
+  .final-panel {
+    gap: 80px !important;
+  }
+  .bs-tile {
+    width: 260px !important;
+    height: 260px !important;
+  }
+  .bs-logo-mark {
+    width: 88px !important;
+    height: 88px !important;
+    font-size: 48px !important;
+  }
+  .bs-brand-name  { font-size: 17px !important; }
+  .bs-headline    { font-size: 23px !important; }
+}
+
+@media (min-width: 1920px) {
+  .section-shell {
+    max-width: 1480px !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   16. SAFE-AREA: iPhone notch / home-bar support
+   ══════════════════════════════════════════════════════════════ */
+
+@supports (padding: env(safe-area-inset-bottom)) {
+  .sticky-cta {
+    padding-bottom: calc(8px + env(safe-area-inset-bottom)) !important;
+  }
+  .footer-disclaimer {
+    padding-bottom: calc(70px + env(safe-area-inset-bottom)) !important;
+  }
+  @media (max-width: 560px) {
+    .footer-disclaimer {
+      padding-bottom: calc(76px + env(safe-area-inset-bottom)) !important;
+    }
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   17. TOUCH: Minimum 44×44px tap targets on mobile
+   ══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 800px) {
+  .button,
+  .arc-card-button,
+  .theme-toggle,
+  .mobile-menu-toggle,
+  .nav-inner button,
+  .footer-social a,
+  .footer-links a,
+  .footer-links button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  /* But don't force 44px width on inline links */
+  .footer-links a,
+  .footer-links button {
+    min-width: 0;
+  }
+  /* Increase form submit button */
+  .final-panel .button {
+    min-height: 50px !important;
+    font-size: 15px !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   18. THEME-SPECIFIC MOBILE OVERRIDES
+   ══════════════════════════════════════════════════════════════ */
+
+/* Dark theme: ensure form fields readable on all sizes */
+:root[data-theme='dark'] .final-panel input,
+:root[data-theme='dark'] .final-panel textarea {
+  color: #f5f5f4 !important;
+}
+
+/* Light theme: suggestion label contrast */
+:root[data-theme='light'] .suggestion-label-row {
+  color: rgba(255,250,244,.88) !important;
+}
+:root[data-theme='light'] .suggestion-optional {
+  color: rgba(255,245,220,.75) !important;
+}
+:root[data-theme='light'] .char-counter {
+  color: rgba(255,255,255,.52) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   19. PRINT: clean print layout
+   ══════════════════════════════════════════════════════════════ */
+
+@media print {
+  .site-nav, .sticky-cta, .mobile-menu, .toast,
+  .modal-backdrop, .cta-sculpture, .brand-showcase,
+  .bs-glow, .bs-particles, .arc-hub-orbits {
+    display: none !important;
+  }
+  .section-shell {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  body {
+    font-size: 12pt;
+    color: #000 !important;
+    background: #fff !important;
+  }
+}

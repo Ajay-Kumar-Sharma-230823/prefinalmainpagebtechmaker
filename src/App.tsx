@@ -263,7 +263,7 @@ function AIGuidance() {
           </div>
         </div>
         <div className="ai-desk-frame">
-          <img src={aiGuidanceWorkspace} alt="A premium B.Tech Maker workspace with a laptop, books, plant, notebook and coffee mug" />
+          <img src={aiGuidanceWorkspace} alt="A premium B.Tech Maker workspace with a laptop, books, plant, notebook and coffee mug" loading="lazy" />
           <span className="ai-laptop-brand"><i>B</i><b>B.Tech Maker</b></span>
         </div>
       </div>
@@ -282,7 +282,7 @@ function Mentors({ notify }: { notify: (m: string) => void }) {
   return <section id="mentors" className="section mentor-cinematic-section">
     <div className="section-shell mentor-cinematic-shell">
       <header className="mentor-cinematic-hero" data-reveal>
-        <img src={mentorsWorkspace} alt="Anonymous engineering students collaborating around a whiteboard and workspace." />
+        <img src={mentorsWorkspace} alt="Anonymous engineering students collaborating around a whiteboard and workspace." loading="lazy" />
         <div className="mentor-hero-copy">
           <span className="mentor-hero-badge"><UsersRound size={16} /> The people behind B.Tech Maker</span>
           <h2>Built by students<br />who know the journey.</h2>
