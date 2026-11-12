@@ -203,10 +203,9 @@ img, svg, video, canvas, audio, iframe, embed, object {
   .mock-content small { font-size: 11px !important; margin-top: 2px !important; }
   .mock-kicker { font-size: 10px !important; letter-spacing: .08em !important; }
 
-  /* ── 5. Internship Opportunities: floating overlap ──
-     Pull the card UP by negative margin so it overlaps the
-     bottom-right of the workspace card — mirrors the desktop.
-     align-self: flex-end right-aligns it inside the flex column.
+  /* ── 5. Internship Opportunities: clean card below workspace ──
+     Removed the negative-margin overlap — it was covering the
+     second resource row. Cards sit together with a tight gap.
   ── */
   .opportunity-float {
     position: relative !important;
@@ -214,15 +213,14 @@ img, svg, video, canvas, audio, iframe, embed, object {
     right: auto !important;
     bottom: auto !important;
     left: auto !important;
-    align-self: flex-end !important;        /* right side of the flex column */
-    margin-top: -72px !important;           /* overlap workspace bottom by 72px */
-    width: min(276px, 88%) !important;
+    align-self: stretch !important;         /* full width */
+    margin-top: 10px !important;            /* small clean gap, no overlap */
+    width: 100% !important;
     max-width: none !important;
     animation: none !important;
     border-radius: 15px !important;
     padding: 13px 15px !important;
     z-index: 10 !important;
-    /* Elevated shadow — like the desktop floating card */
     box-shadow:
       0 1px 0 rgba(255,255,255,0.10),
       0 20px 52px rgba(0,0,0,0.70),
@@ -265,13 +263,13 @@ img, svg, video, canvas, audio, iframe, embed, object {
   }
 }
 
-/* ── Narrow 360px: reduce overlap so float doesn't cover content ── */
+/* ── Narrow 360px: tighter sizing ── */
 @media (max-width: 360px) {
   .hero-copy h1 {
     font-size: clamp(34px, 10.5vw, 44px) !important;
   }
   .browser-card {
-    transform: perspective(1400px) rotate(1deg) !important; /* tighter tilt */
+    transform: perspective(1400px) rotate(1deg) !important;
     border-radius: 16px !important;
   }
   .browser-body {
@@ -281,8 +279,7 @@ img, svg, video, canvas, audio, iframe, embed, object {
     font-size: clamp(20px, 6.5vw, 26px) !important;
   }
   .opportunity-float {
-    margin-top: -55px !important;           /* slightly less overlap at 360px */
-    width: min(250px, 90%) !important;
+    margin-top: 8px !important;
     padding: 11px 13px !important;
   }
 }
