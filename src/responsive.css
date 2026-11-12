@@ -148,7 +148,7 @@ img, svg, video, canvas, audio, iframe, embed, object {
     margin-right: 0 !important;
   }
 
-  /* Browser / Academic Workspace card: full width, static */
+  /* ── Academic Workspace card: full width, properly sized ── */
   .browser-card {
     position: relative !important;
     top: auto !important;
@@ -158,6 +158,48 @@ img, svg, video, canvas, audio, iframe, embed, object {
     transform: none !important;
     animation: none !important;
     border-radius: 16px !important;
+  }
+
+  /* Increase workspace internal padding and text sizes */
+  .browser-body {
+    padding: 20px !important;
+  }
+  .browser-body h3 {
+    font-size: clamp(22px, 6.5vw, 30px) !important;
+    margin: 8px 0 16px !important;
+    line-height: 1.18 !important;
+  }
+  .browser-body nav {
+    gap: clamp(14px, 5vw, 22px) !important;
+    padding-bottom: 10px !important;
+  }
+  .browser-body nav > * {
+    font-size: 13px !important;
+    padding-bottom: 10px !important;
+  }
+  .mock-content {
+    gap: 10px !important;
+    margin-top: 16px !important;
+  }
+  .mock-content article {
+    min-height: 58px !important;
+    padding: 11px !important;
+    gap: 11px !important;
+  }
+  .mock-content article > span {
+    width: 34px !important;
+    height: 34px !important;
+  }
+  .mock-content b {
+    font-size: 13px !important;
+  }
+  .mock-content small {
+    font-size: 11px !important;
+    margin-top: 2px !important;
+  }
+  .mock-kicker {
+    font-size: 10px !important;
+    letter-spacing: .08em !important;
   }
 
   /* Internship Opportunities card: static, full width, below browser card */
@@ -172,7 +214,7 @@ img, svg, video, canvas, audio, iframe, embed, object {
     margin: 0 !important;
     animation: none !important;
     border-radius: 12px !important;
-    padding: 12px 14px !important;
+    padding: 14px 16px !important;
   }
 
   /* Roadmap float: hide on mobile (too cramped) */
@@ -185,10 +227,12 @@ img, svg, video, canvas, audio, iframe, embed, object {
   .glow-two { width: 120px !important; height: 120px !important; bottom: 10px !important; left: 10px !important; }
 
   /* Internship card text sizes on mobile */
-  .opps-head span { font-size: 9px !important; }
-  .opportunity-float article { min-height: 36px !important; }
-  .opportunity-float b { font-size: 12px !important; }
-  .opportunity-float small { font-size: 10px !important; }
+  .opps-head span { font-size: 10px !important; }
+  .opps-head b { font-size: 11px !important; }
+  .opportunity-float article { min-height: 40px !important; gap: 8px !important; }
+  .opportunity-logo { width: 26px !important; height: 26px !important; font-size: 11px !important; border-radius: 7px !important; }
+  .opportunity-float b { font-size: 13px !important; }
+  .opportunity-float small { font-size: 11px !important; }
   .opportunity-note { display: none !important; }
 }
 
@@ -197,7 +241,13 @@ img, svg, video, canvas, audio, iframe, embed, object {
     font-size: clamp(32px, 10vw, 40px) !important;
   }
   .opportunity-float {
-    padding: 10px 12px !important;
+    padding: 11px 13px !important;
+  }
+  .browser-body {
+    padding: 16px !important;
+  }
+  .browser-body h3 {
+    font-size: clamp(20px, 6vw, 26px) !important;
   }
 }
 
@@ -332,7 +382,7 @@ img, svg, video, canvas, audio, iframe, embed, object {
 }
 
 /* ══════════════════════════════════════════════════════════════
-   6. GUIDANCE / AI SECTION
+   6. GUIDANCE / AI SECTION – UNIFORM FEATURE CARD GRID
    ══════════════════════════════════════════════════════════════ */
 
 @media (max-width: 480px) {
@@ -346,12 +396,110 @@ img, svg, video, canvas, audio, iframe, embed, object {
   .ai-guidance-action {
     min-height: 72px !important;
   }
-  .ai-feature-stage {
-    min-height: 240px !important;
-  }
   .ai-desk-frame {
     min-height: 0 !important;
     aspect-ratio: 1.4 !important;
+  }
+}
+
+/* ── UNIFORM 2×3 FEATURE CARD GRID ON MOBILE ──
+   polish.css already applies a 2-col grid at ≤560px.
+   The cards grow to different heights when titles wrap.
+   Fix: make the grid rows equal height and stretch each card.
+   ── */
+@media (max-width: 600px) {
+  /* Grid: 2 equal columns, 3 equal rows — all cells identical */
+  .ai-feature-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: repeat(3, 1fr) !important;
+    grid-auto-rows: 1fr !important;   /* future-proof */
+    gap: 10px !important;
+    align-items: stretch !important;
+  }
+
+  /* Every card stretches to fill its cell completely */
+  .ai-feature-card {
+    width: 100% !important;
+    height: 100% !important;          /* fill the equal-height row */
+    min-height: 0 !important;         /* let the grid row drive height */
+    padding: 14px 10px !important;
+    border-radius: 18px !important;
+    gap: 8px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Uniform icon */
+  .ai-feature-icon {
+    width: 32px !important;
+    height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+  }
+  .ai-feature-icon svg {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  /* Title: allow wrapping, uniform size, centered */
+  .ai-feature-card strong {
+    font-size: 13px !important;
+    line-height: 1.25 !important;
+    max-width: 100% !important;
+    text-align: center !important;
+    word-break: break-word !important;
+  }
+
+  /* Stage: let the grid auto-size rows equally */
+  .ai-feature-stage {
+    min-height: 0 !important;
+  }
+
+  /* Connection lines: not applicable on mobile */
+  .ai-feature-connection {
+    display: none !important;
+  }
+}
+
+/* 480px: slightly tighter */
+@media (max-width: 480px) {
+  .ai-feature-grid {
+    gap: 8px !important;
+  }
+  .ai-feature-card {
+    padding: 12px 8px !important;
+    border-radius: 16px !important;
+  }
+  .ai-feature-card strong {
+    font-size: 12px !important;
+  }
+  .ai-feature-icon svg {
+    width: 26px !important;
+    height: 26px !important;
+  }
+}
+
+/* 360px: tightest */
+@media (max-width: 360px) {
+  .ai-feature-grid {
+    gap: 7px !important;
+  }
+  .ai-feature-card {
+    padding: 10px 6px !important;
+    border-radius: 14px !important;
+  }
+  .ai-feature-card strong {
+    font-size: 11px !important;
+  }
+  .ai-feature-icon svg {
+    width: 24px !important;
+    height: 24px !important;
   }
 }
 
