@@ -22,6 +22,14 @@ img, svg, video, canvas, audio, iframe, embed, object {
   max-width: 100%;
 }
 
+/* The orbit SVG is intentionally wider than the logo hub that owns it.
+   Treat it as a decorative coordinate system, not responsive content: the
+   global SVG rule above would otherwise clamp its 540px viewBox to the
+   184px hub and distort the platform/ring composition in production. */
+.arc-hub-orbits {
+  max-width: none;
+}
+
 /* ══════════════════════════════════════════════════════════════
    1. PERFORMANCE: Lazy-load below-fold images, reduced motion
    ══════════════════════════════════════════════════════════════ */
