@@ -8,6 +8,7 @@ import './polish.css'
 import './updates.css'
 import './theme-fix.css'
 import './responsive.css'
+import './guidance-orbit.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode><App /></StrictMode>,

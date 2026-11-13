@@ -226,6 +226,17 @@ const Features = memo(function Features({ notify }: { notify: (m: string) => voi
 function AIGuidance() {
   const [expandedStep, setExpandedStep] = useState<number | null>(null)
 
+  // Orbit layout order: top-center, upper-left, upper-right, mid-left, mid-right, bottom-center
+  const orbitSlots = ['top-center', 'upper-left', 'upper-right', 'mid-left', 'mid-right', 'bottom-center']
+  const orbitFeatures = [
+    aiGuidanceFeatures[1], // Skill Development  → top-center
+    aiGuidanceFeatures[0], // Certifications     → upper-left
+    aiGuidanceFeatures[2], // Internships & Jobs → upper-right
+    aiGuidanceFeatures[3], // Learning Resources → mid-left
+    aiGuidanceFeatures[5], // Mentorship         → mid-right
+    aiGuidanceFeatures[4], // Hackathons         → bottom-center
+  ]
+
   return <section className="section ai-guidance-section" aria-labelledby="ai-guidance-title">
     <div className="section-shell ai-guidance-layout">
       <div className="ai-guidance-copy" data-reveal>
@@ -250,22 +261,37 @@ function AIGuidance() {
           })}
         </div>
       </div>
-      <div className="ai-workspace" aria-label="B.Tech Maker guidance workspace">
-        <div className="ai-feature-stage">
-          <svg className="ai-feature-connection" viewBox="0 0 600 230" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M 100 54 C 170 15, 230 15, 300 54 C 370 15, 430 15, 500 54 C 550 94, 550 148, 500 188 C 430 224, 370 224, 300 188 C 230 224, 170 224, 100 188 C 50 148, 50 94, 100 54" />
-            {[['100', '54'], ['300', '54'], ['500', '54'], ['100', '188'], ['300', '188'], ['500', '188']].map(([cx, cy]) => <circle cx={cx} cy={cy} r="4.5" key={`${cx}-${cy}`} />)}
-          </svg>
-          <div className="ai-feature-grid">
-            {aiGuidanceFeatures.map(({ id, title, Icon }) => <article className="ai-feature-card" key={id}>
-              <span className="ai-feature-icon"><Icon size={30} strokeWidth={2.15} /></span><strong>{title}</strong>
-            </article>)}
+
+      {/* RIGHT SIDE: orbit composition */}
+      <div className="ai-orbit-stage" aria-label="B.Tech Maker guidance features">
+        {/* Elliptical dotted orbit ring */}
+        <svg className="ai-orbit-ring" viewBox="0 0 800 700" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+          <ellipse cx="400" cy="350" rx="335" ry="292" className="ai-orbit-ellipse-glow" />
+          <ellipse cx="400" cy="350" rx="335" ry="292" className="ai-orbit-ellipse" />
+          <circle cx="400" cy="58"  r="6" className="ai-orbit-node" />
+          <circle cx="130" cy="201" r="6" className="ai-orbit-node" />
+          <circle cx="670" cy="201" r="6" className="ai-orbit-node" />
+          <circle cx="66"  cy="400" r="4" className="ai-orbit-node ai-orbit-node--sm" />
+          <circle cx="734" cy="400" r="4" className="ai-orbit-node ai-orbit-node--sm" />
+          <circle cx="400" cy="642" r="6" className="ai-orbit-node" />
+        </svg>
+
+        {/* Central desk image */}
+        <div className="ai-orbit-image-wrap">
+          <div className="ai-orbit-image-glow" />
+          <div className="ai-orbit-image">
+            <img src={aiGuidanceWorkspace} alt="A premium B.Tech Maker workspace with a laptop, books, plant, notebook and coffee mug" loading="lazy" />
+            <span className="ai-laptop-brand"><i>B</i><b>B.Tech Maker</b></span>
           </div>
         </div>
-        <div className="ai-desk-frame">
-          <img src={aiGuidanceWorkspace} alt="A premium B.Tech Maker workspace with a laptop, books, plant, notebook and coffee mug" loading="lazy" />
-          <span className="ai-laptop-brand"><i>B</i><b>B.Tech Maker</b></span>
-        </div>
+
+        {/* Six floating feature cards */}
+        {orbitFeatures.map(({ id, title, Icon }, i) => (
+          <article key={id} className={`ai-float-card ai-float-card--${orbitSlots[i]}`} aria-label={title}>
+            <span className="ai-float-icon"><Icon size={28} strokeWidth={1.9} /></span>
+            <strong>{title}</strong>
+          </article>
+        ))}
       </div>
     </div>
   </section>

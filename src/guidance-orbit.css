@@ -1,0 +1,345 @@
+/* ==========================================================
+   AI GUIDANCE — DESKTOP ORBIT COMPOSITION
+   This file intentionally owns only the right-side artwork.
+   ========================================================== */
+
+:root[data-theme='dark'] .ai-guidance-section {
+  background:
+    radial-gradient(ellipse at 77% 50%, rgba(214, 147, 48, .12), transparent 37%),
+    radial-gradient(ellipse at 68% 85%, rgba(150, 83, 18, .09), transparent 36%),
+    #060606 !important;
+}
+
+.ai-guidance-section { overflow: visible !important; }
+
+.ai-guidance-layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 44fr) minmax(0, 56fr) !important;
+  gap: clamp(26px, 3vw, 48px) !important;
+  align-items: center !important;
+  overflow: visible !important;
+}
+
+/* The stage is deliberately allowed to occupy the entire right column.
+   At 1920px the 8:7 canvas is about 820 × 718px: the desk is 630px wide. */
+.ai-orbit-stage {
+  position: relative;
+  width: min(100%, 820px);
+  aspect-ratio: 8 / 7;
+  margin: 0 auto;
+  isolation: isolate;
+  overflow: visible;
+}
+
+.ai-orbit-stage::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  inset: 19% 7% 13%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(240, 168, 61, .22) 0%, rgba(184, 104, 28, .1) 38%, transparent 71%);
+  filter: blur(15px);
+  pointer-events: none;
+}
+
+.ai-orbit-ring {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.ai-orbit-ellipse-glow {
+  fill: none;
+  stroke: #e4a241;
+  stroke-width: 18;
+  opacity: .12;
+  filter: blur(13px);
+}
+
+.ai-orbit-ellipse {
+  fill: none;
+  stroke: #f5c77c;
+  stroke-width: 1.7;
+  stroke-dasharray: 6 10;
+  opacity: .86;
+}
+
+.ai-orbit-node {
+  fill: #ffcf7a;
+  filter: drop-shadow(0 0 5px rgba(255, 192, 76, .95)) drop-shadow(0 0 13px rgba(225, 139, 31, .72));
+}
+
+.ai-orbit-node--sm { fill: #f2b44e; opacity: .82; }
+
+.ai-orbit-image-wrap {
+  position: absolute;
+  z-index: 2;
+  top: 52.5%;
+  left: 50%;
+  width: clamp(500px, 77%, 640px);
+  aspect-ratio: 1.598;
+  transform: translate(-50%, -50%);
+}
+
+.ai-orbit-image-glow {
+  position: absolute;
+  z-index: -1;
+  inset: -16% -11% -20%;
+  border-radius: 44%;
+  background: radial-gradient(ellipse at 50% 58%, rgba(255, 191, 91, .33), rgba(185, 105, 28, .14) 42%, transparent 72%);
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+.ai-orbit-image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(255, 221, 161, .64);
+  border-radius: clamp(24px, 3.25vw, 40px);
+  background: #1b120d;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 245, 222, .35),
+    0 0 0 1px rgba(160, 89, 21, .23),
+    0 19px 28px rgba(55, 23, 4, .28),
+    0 38px 66px rgba(0, 0, 0, .58),
+    0 0 52px rgba(235, 151, 48, .21);
+}
+
+.ai-orbit-image::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(145deg, rgba(255, 235, 201, .13), transparent 28%, transparent 72%, rgba(41, 12, 0, .12));
+  pointer-events: none;
+}
+
+.ai-orbit-image::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  right: 7%;
+  bottom: -15%;
+  width: 50%;
+  height: 28%;
+  border-radius: 50%;
+  background: rgba(255, 170, 54, .24);
+  filter: blur(28px);
+  pointer-events: none;
+}
+
+.ai-orbit-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.ai-orbit-image .ai-laptop-brand {
+  position: absolute;
+  z-index: 2;
+  top: 49%;
+  left: 68%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(11px, 1.15vw, 16px);
+}
+
+.ai-orbit-image .ai-laptop-brand i {
+  width: clamp(21px, 2vw, 27px);
+  height: clamp(21px, 2vw, 27px);
+  border-radius: 7px;
+  font-size: clamp(14px, 1.4vw, 18px);
+}
+
+/* A real feature panel: the card, icon and copy are all intentionally large. */
+.ai-float-card {
+  position: absolute;
+  z-index: 3;
+  width: clamp(145px, 25%, 205px);
+  height: clamp(125px, 18.5%, 140px);
+  min-height: 0;
+  padding: 18px 14px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  color: #fffdf8;
+  background:
+    radial-gradient(circle at 16% 10%, rgba(255, 216, 151, .17), transparent 38%),
+    linear-gradient(145deg, #32271e 0%, #171410 55%, #0f0e0d 100%);
+  border: 1px solid rgba(247, 209, 145, .72);
+  border-radius: clamp(21px, 2.5vw, 31px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 245, 225, .2),
+    inset 0 -11px 22px rgba(0, 0, 0, .24),
+    0 2px 0 rgba(255, 225, 173, .1),
+    0 12px 18px rgba(72, 36, 5, .29),
+    0 25px 35px rgba(0, 0, 0, .55),
+    0 20px 23px -19px rgba(255, 165, 46, .95);
+  text-align: center;
+  transition: translate .24s ease, scale .24s ease, box-shadow .24s ease, border-color .24s ease;
+}
+
+.ai-float-card::after {
+  content: '';
+  position: absolute;
+  right: 13%;
+  bottom: -9px;
+  left: 13%;
+  height: 15px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255, 187, 73, .93), rgba(232, 133, 23, .3) 47%, transparent 73%);
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+.ai-float-card:hover {
+  z-index: 4;
+  translate: 0 -7px;
+  scale: 1.025;
+  border-color: #ffe0a7;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 245, 225, .28),
+    inset 0 -11px 22px rgba(0, 0, 0, .24),
+    0 14px 23px rgba(75, 37, 4, .36),
+    0 30px 40px rgba(0, 0, 0, .62),
+    0 24px 26px -17px rgba(255, 177, 52, 1);
+}
+
+.ai-float-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  color: #ffedce;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .36)) drop-shadow(0 0 8px rgba(255, 197, 102, .14));
+}
+
+.ai-float-icon svg {
+  width: 47px;
+  height: 47px;
+  stroke-width: 1.65;
+}
+
+.ai-float-card strong {
+  display: block;
+  max-width: 170px;
+  color: inherit;
+  font-size: clamp(14px, 1.65vw, 19px);
+  font-weight: 700;
+  letter-spacing: -.055em;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+/* The panels sit on the ring and overlap the oversized desk, rather than
+   orbiting as isolated miniature buttons. */
+.ai-float-card--top-center { top: 10.7%; left: 50%; transform: translate(-50%, -50%); }
+.ai-float-card--upper-left { top: 28.8%; left: 18.1%; transform: translate(-50%, -50%); }
+.ai-float-card--upper-right { top: 28.8%; left: 81.9%; transform: translate(-50%, -50%); }
+.ai-float-card--mid-left { top: 57.2%; left: 11%; transform: translate(-50%, -50%); }
+.ai-float-card--mid-right { top: 57.2%; left: 89%; transform: translate(-50%, -50%); }
+.ai-float-card--bottom-center { top: 88.6%; left: 50%; transform: translate(-50%, -50%); }
+
+:root[data-theme='light'] .ai-orbit-stage::before { background: radial-gradient(ellipse, rgba(162, 98, 31, .16), transparent 66%); }
+:root[data-theme='light'] .ai-orbit-ellipse { stroke: #8a5d28; opacity: .52; }
+:root[data-theme='light'] .ai-orbit-ellipse-glow { stroke: #a2692e; opacity: .09; }
+:root[data-theme='light'] .ai-orbit-node { fill: #9d682c; }
+:root[data-theme='light'] .ai-float-card {
+  color: #fffdf8;
+  background: radial-gradient(circle at 16% 10%, rgba(255, 216, 151, .17), transparent 38%), linear-gradient(145deg, #382a1e, #17130f 59%, #100e0c);
+  border-color: rgba(174, 119, 54, .72);
+}
+
+/* Other sections retain their existing content width.  This single section
+   gets the room its intentionally large right-side composition requires. */
+@media (min-width: 1500px) {
+  .ai-guidance-layout { width: min(1400px, calc(100% - 64px)) !important; }
+}
+
+@media (min-width: 1600px) {
+  .ai-guidance-layout { width: min(1600px, calc(100% - 64px)) !important; }
+}
+
+/* Keep the preserved copy column slightly ahead of the orbit’s highest card,
+   as in the reference.  This is positional only: the artwork is never scaled. */
+@media (min-width: 861px) {
+  .ai-guidance-section { padding-bottom: 86px !important; }
+  .ai-orbit-stage { translate: 0 86px; }
+}
+
+@media (max-width: 1180px) {
+  .ai-guidance-layout { grid-template-columns: minmax(0, 46fr) minmax(0, 54fr) !important; gap: 26px !important; }
+  .ai-orbit-image-wrap { width: 76%; }
+  .ai-float-card { width: clamp(138px, 25%, 188px); height: 122px; padding: 15px 10px 14px; }
+  .ai-float-icon, .ai-float-icon svg { width: 42px; height: 42px; }
+  .ai-float-card strong { font-size: clamp(13px, 1.65vw, 17px); }
+}
+
+@media (max-width: 860px) {
+  .ai-guidance-layout { grid-template-columns: 1fr !important; gap: 45px !important; }
+  .ai-guidance-copy { max-width: 590px !important; }
+  .ai-orbit-stage { width: min(100%, 720px); }
+  .ai-orbit-image-wrap { width: 77%; }
+}
+
+@media (max-width: 680px) {
+  .ai-orbit-stage { width: min(100%, 590px); }
+  .ai-float-card { width: clamp(128px, 25%, 150px); height: 108px; padding: 12px 8px; gap: 7px; border-radius: 20px; }
+  .ai-float-icon, .ai-float-icon svg { width: 36px; height: 36px; }
+  .ai-float-card strong { font-size: 13px; }
+}
+
+/* On phones the visual becomes an ordered picture plus six readable feature
+   panels. Nothing is merely shrunk from the desktop orbit. */
+@media (max-width: 560px) {
+  .ai-orbit-stage {
+    width: 100%;
+    aspect-ratio: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .ai-orbit-stage::before, .ai-orbit-ring, .ai-orbit-image-glow { display: none; }
+  .ai-orbit-image-wrap {
+    position: relative;
+    z-index: 1;
+    top: auto;
+    left: auto;
+    width: 100%;
+    aspect-ratio: 1.598;
+    grid-column: 1 / -1;
+    transform: none;
+    margin-bottom: 7px;
+  }
+  .ai-orbit-image { border-radius: 21px; }
+  .ai-float-card {
+    position: static;
+    z-index: 1;
+    width: 100%;
+    height: auto;
+    min-height: 104px;
+    padding: 14px 9px 13px;
+    transform: none !important;
+    border-radius: 18px;
+  }
+  .ai-float-card:hover { translate: 0 -3px; scale: 1.01; }
+  .ai-float-card::after { right: 18%; left: 18%; bottom: -8px; }
+  .ai-float-icon, .ai-float-icon svg { width: 35px; height: 35px; }
+  .ai-float-card strong { font-size: 13px; }
+}
+
+@media (max-width: 390px) {
+  .ai-orbit-stage { gap: 8px; }
+  .ai-float-card { min-height: 92px; padding: 11px 6px; border-radius: 16px; gap: 6px; }
+  .ai-float-icon, .ai-float-icon svg { width: 31px; height: 31px; }
+  .ai-float-card strong { font-size: 12px; }
+}
