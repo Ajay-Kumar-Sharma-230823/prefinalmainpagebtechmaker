@@ -1,0 +1,1247 @@
+/* ============================================================
+   B.TECH MAKER – GLOBAL THEME CONSISTENCY FIX
+   This file is loaded last to ensure every section responds
+   to the global dark/light theme toggle without exception.
+   ============================================================ */
+
+/* ================================================================
+   CRITICAL FIX 1: --on-strong token was #0a0a0a (near-black) in
+   dark mode, making text on dark surfaces completely invisible.
+   The semantic intent: "text color on the strong/accent surface."
+   In dark mode the strong surface is dark charcoal (#171717), so
+   text on it must be light, not black.
+   ================================================================ */
+:root[data-theme='dark'] {
+  --on-strong: #f5f5f3;
+}
+
+/* ================================================================
+   CRITICAL FIX 2: Arc-hub logo – restore original golden appearance.
+   updates.css used CSS variables that in dark mode resolved to
+   grey/white. We bypass variables and use hardcoded gold here.
+   These golden colors match the reference screenshot exactly.
+   ================================================================ */
+.arc-hub-platform {
+  background: radial-gradient(ellipse, #633004 0 25%, #1b110d 57%, #080909 72%) !important;
+  border: 1px solid #f7a60d !important;
+  box-shadow:
+    inset 0 8px 13px rgba(255,187,34,.33),
+    0 12px 14px rgba(0,0,0,.48),
+    0 0 19px rgba(255,156,0,.56) !important;
+}
+.arc-hub-core {
+  color: #fff6d5 !important;
+  background: radial-gradient(circle at 50% 24%, #5a3606, #1e1206 48%, #08090d 75%) !important;
+  border-color: #ffbd2d !important;
+  box-shadow:
+    inset 0 0 26px rgba(255,189,37,.36),
+    0 0 15px rgba(255,174,12,.7),
+    0 12px 22px rgba(0,0,0,.52) !important;
+}
+.arc-hub-mark {
+  color: #111 !important;
+  background: #fffdf7 !important;
+  box-shadow: 0 0 13px rgba(255,245,207,.56) !important;
+}
+.arc-hub-core b {
+  color: #fff6d5 !important;
+  text-shadow: 0 0 10px rgba(255,204,74,.55);
+}
+
+/* ================================================================
+   CRITICAL FIX 3: Orbital rings – restore original golden/amber
+   color. They were inheriting var(--brown) which = #fafafa (white)
+   in dark mode. Use hardcoded golden strokes that always look right.
+   ================================================================ */
+.arc-hub-orbits ellipse {
+  stroke: #f7a60d !important;
+  opacity: .58 !important;
+}
+.arc-hub-orbits ellipse:nth-child(2) { opacity: .44 !important; }
+.arc-hub-orbits ellipse:nth-child(3) { opacity: .30 !important; }
+.arc-hub-orbits ellipse:nth-child(4) { opacity: .18 !important; }
+
+/* ---- 1. ABOUT ARC SECTION – theme-aware ---- */
+.about-arc-section {
+  background:
+    radial-gradient(circle at 50% 100%, color-mix(in srgb, var(--tan) 18%, transparent), transparent 38%),
+    var(--page) !important;
+}
+.about-arc-heading h2,
+.about-arc-kicker {
+  color: var(--ink) !important;
+  text-shadow: none !important;
+}
+.about-arc-heading h2 em {
+  color: var(--brown);
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+.about-arc-section::before {
+  opacity: .34 !important;
+  background-image:
+    linear-gradient(90deg, color-mix(in srgb, var(--brown) 10%, transparent) 1px, transparent 1px),
+    linear-gradient(color-mix(in srgb, var(--brown) 8%, transparent) 1px, transparent 1px) !important;
+}
+.about-arc-description {
+  color: var(--muted);
+  margin-top: 32px;
+  font-size: 15px;
+  text-align: center;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Dark theme overrides for about arc section */
+:root[data-theme='dark'] .about-arc-section {
+  background:
+    radial-gradient(circle at 50% 100%, rgba(255,255,255,.04), transparent 38%),
+    var(--page) !important;
+}
+:root[data-theme='dark'] .about-arc-heading h2 em {
+  color: var(--brown);
+}
+
+/* ---- 2. MENTOR CINEMATIC SECTION – fully theme-aware ---- */
+/* Override the hardcoded dark values from polish.css */
+.mentor-cinematic-section {
+  color: var(--ink) !important;
+  background:
+    radial-gradient(ellipse at 50% 100%, color-mix(in srgb, var(--tan) 25%, transparent), transparent 43%),
+    var(--alt) !important;
+}
+.mentor-cinematic-section::before,
+.mentor-cinematic-section::after {
+  border-top-color: color-mix(in srgb, var(--brown) 36%, transparent) !important;
+  box-shadow: none !important;
+  opacity: .45;
+}
+.mentor-cinematic-hero {
+  background: var(--strong-surface) !important;
+  border-color: var(--line) !important;
+}
+.mentor-cinematic-hero::after {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--strong-surface) 96%, transparent),
+    color-mix(in srgb, var(--strong-surface) 86%, transparent) 34%,
+    color-mix(in srgb, var(--strong-surface) 25%, transparent) 63%,
+    transparent
+  ) !important;
+}
+.mentor-hero-badge {
+  color: var(--on-strong) !important;
+  border-color: color-mix(in srgb, var(--on-strong) 65%, transparent) !important;
+}
+.mentor-hero-copy h2 {
+  color: var(--on-strong) !important;
+}
+.mentor-hero-copy p {
+  color: color-mix(in srgb, var(--on-strong) 75%, transparent) !important;
+}
+
+/* Profile cards */
+.mentor-profile-card {
+  color: var(--ink) !important;
+  background: var(--card) !important;
+  border-color: var(--line) !important;
+  box-shadow: var(--soft) !important;
+}
+.mentor-profile-photo {
+  background: var(--alt) !important;
+}
+.mentor-profile-role {
+  color: var(--brown) !important;
+  border-color: var(--line) !important;
+  background: color-mix(in srgb, var(--brown) 12%, var(--card)) !important;
+}
+.mentor-profile-content h3 {
+  color: var(--ink) !important;
+}
+.mentor-profile-content p {
+  color: var(--muted) !important;
+}
+.mentor-profile-tags span {
+  color: var(--brown) !important;
+  background: color-mix(in srgb, var(--brown) 10%, var(--card)) !important;
+  border: 1px solid color-mix(in srgb, var(--brown) 15%, var(--line)) !important;
+}
+.mentor-cinematic-section .mentor-request {
+  color: var(--brown) !important;
+  border-color: var(--brown) !important;
+}
+.mentor-cinematic-section .mentor-request:hover {
+  color: var(--page) !important;
+  background: var(--brown) !important;
+}
+
+/* Value strip */
+.mentor-value-strip article {
+  border-color: var(--line) !important;
+}
+.mentor-value-icon {
+  color: var(--brown) !important;
+  border-color: var(--line) !important;
+  background: var(--card) !important;
+}
+.mentor-value-strip strong {
+  color: var(--ink) !important;
+}
+.mentor-value-strip small {
+  color: var(--muted) !important;
+}
+
+/* Dark-mode mentor specific overrides */
+:root[data-theme='dark'] .mentor-cinematic-section {
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(255,255,255,.04), transparent 43%),
+    var(--alt) !important;
+}
+
+/* ---- 3. FEATURES SECTION – theme-aware ---- */
+.feature-rebuild {
+  background: var(--page) !important;
+}
+
+/* ---- 4. AI GUIDANCE SECTION – theme-aware ---- */
+.ai-guidance-section {
+  background:
+    radial-gradient(circle at 87% 14%, color-mix(in srgb, var(--tan) 25%, transparent), transparent 25%),
+    var(--page) !important;
+}
+.ai-guidance-badge {
+  color: var(--page) !important;
+  background: var(--brown) !important;
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--ink) 13%, transparent);
+}
+.ai-guidance-badge svg {
+  color: var(--page) !important;
+}
+.ai-guidance-copy h2,
+.ai-action-copy strong,
+.ai-feature-card strong {
+  color: var(--ink) !important;
+}
+.ai-guidance-copy h2 em {
+  color: var(--page) !important;
+  background: var(--brown) !important;
+  border-color: var(--brown) !important;
+}
+.ai-guidance-copy > p,
+.ai-action-copy > span {
+  color: var(--muted) !important;
+}
+.ai-guidance-action {
+  color: var(--ink) !important;
+  background: var(--card) !important;
+  border-color: var(--line) !important;
+  box-shadow: 0 7px 15px color-mix(in srgb, var(--ink) 5%, transparent) !important;
+}
+.ai-guidance-action:hover,
+.ai-guidance-action.is-active {
+  background: var(--alt) !important;
+  border-color: var(--tan) !important;
+}
+.ai-action-icon {
+  color: var(--brown) !important;
+  background: var(--alt) !important;
+}
+.ai-guidance-action.is-active .ai-action-icon {
+  color: var(--page) !important;
+  background: var(--brown) !important;
+}
+.ai-action-copy small,
+.ai-action-arrow {
+  color: var(--faint) !important;
+}
+.ai-step-detail-list {
+  background: var(--alt) !important;
+  border-color: var(--line) !important;
+  box-shadow: none !important;
+}
+.ai-step-detail-list > span,
+.ai-step-detail-list svg {
+  color: var(--muted) !important;
+}
+.ai-workspace::before {
+  background: radial-gradient(circle at 54% 22%, color-mix(in srgb, var(--card) 95%, transparent), transparent 69%) !important;
+}
+.ai-feature-connection {
+  color: var(--brown) !important;
+  opacity: .55;
+}
+.ai-feature-connection circle {
+  stroke: var(--page) !important;
+}
+.ai-feature-card {
+  color: var(--ink) !important;
+  background: var(--card) !important;
+  border-color: var(--line) !important;
+  box-shadow: 0 13px 23px color-mix(in srgb, var(--ink) 9%, transparent) !important;
+}
+.ai-desk-frame {
+  background: var(--card) !important;
+  border-color: var(--line) !important;
+  box-shadow: 0 18px 31px color-mix(in srgb, var(--ink) 12%, transparent) !important;
+}
+
+/* ---- 5. PRICING SECTION – theme-aware ---- */
+.section-alt {
+  background: var(--alt) !important;
+}
+.plan-card {
+  color: var(--ink) !important;
+  background: var(--card) !important;
+  border-color: var(--line) !important;
+}
+.plan-card li {
+  color: var(--muted) !important;
+}
+.plan-card li svg {
+  color: var(--brown) !important;
+}
+.plan-card > p {
+  color: var(--muted) !important;
+}
+.plan-card.pro {
+  color: var(--on-strong) !important;
+  background: var(--strong-surface) !important;
+  border-color: var(--strong-surface) !important;
+}
+.plan-card.pro .eyebrow,
+.plan-card.pro > p,
+.plan-card.pro li {
+  color: color-mix(in srgb, var(--on-strong) 75%, transparent) !important;
+}
+.plan-card.pro li svg {
+  color: var(--on-strong) !important;
+}
+.plan-card.pro .button-primary {
+  color: var(--strong-surface) !important;
+  background: var(--on-strong) !important;
+}
+
+/* ---- 6. REGISTRATION / FINAL SECTION – theme-aware ---- */
+.final-panel {
+  color: #fffaf4 !important;
+  background: var(--brown) !important;
+}
+.final-panel .eyebrow {
+  color: color-mix(in srgb, #fffaf4 75%, transparent) !important;
+}
+.final-panel h2 i {
+  color: #e6c399 !important;
+}
+.final-panel p {
+  color: #e1cdb9 !important;
+}
+.final-panel input {
+  color: #fffaf4 !important;
+  background: rgba(255,255,255,.12) !important;
+  border-color: rgba(255,255,255,.27) !important;
+}
+.final-panel input::placeholder {
+  color: #ddc3aa !important;
+}
+.final-panel .button-primary {
+  color: var(--brown) !important;
+  background: #fffaf4 !important;
+}
+.final-panel .tagline {
+  color: #e0c5aa !important;
+}
+.final-panel .early-success {
+  color: #fffaf4 !important;
+  background: rgba(255,255,255,.11) !important;
+  border-color: rgba(255,255,255,.22) !important;
+}
+.final-panel .early-success small {
+  color: #e0c9b4 !important;
+}
+
+/* Dark theme: registration panel stays branded */
+:root[data-theme='dark'] .final-panel {
+  color: #f5f5f4 !important;
+  background: linear-gradient(135deg, #1a1a1a 0%, #0c0c0c 100%) !important;
+  border: 1px solid #3b3b3b;
+}
+:root[data-theme='dark'] .final-panel .eyebrow {
+  color: #d2d2d2 !important;
+}
+:root[data-theme='dark'] .final-panel h2 i {
+  color: #c9c9c9 !important;
+}
+:root[data-theme='dark'] .final-panel p {
+  color: #c3c3c3 !important;
+}
+:root[data-theme='dark'] .final-panel input {
+  color: #f5f5f4 !important;
+  background: rgba(255,255,255,.06) !important;
+  border-color: #515151 !important;
+}
+:root[data-theme='dark'] .final-panel input::placeholder {
+  color: #9b9b9b !important;
+}
+:root[data-theme='dark'] .final-panel .button-primary {
+  color: #161616 !important;
+  background: #f1f1ef !important;
+}
+:root[data-theme='dark'] .final-panel .tagline {
+  color: #aaa !important;
+}
+:root[data-theme='dark'] .final-panel .early-success {
+  color: #f5f5f4 !important;
+  background: rgba(255,255,255,.07) !important;
+  border-color: #4a4a4a !important;
+}
+:root[data-theme='dark'] .final-panel .early-success small {
+  color: #bcbcbc !important;
+}
+/* Hide the old sculpture — replaced by BrandShowcase */
+.cta-sculpture { display: none !important; }
+:root[data-theme='dark'] .cta-sculpture b,
+:root[data-theme='dark'] .cta-sculpture i,
+:root[data-theme='dark'] .cta-sculpture span { display: none !important; }
+
+/* ================================================================
+   BRAND SHOWCASE — premium right-side registration illustration
+   ================================================================ */
+
+/* ── Keyframes ───────────────────────────────────────────────── */
+@keyframes bs-float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+@keyframes bs-glow-pulse {
+  0%, 100% { opacity: .60; transform: translate(-50%, -50%) scale(1);   }
+  50%       { opacity: .90; transform: translate(-50%, -50%) scale(1.12); }
+}
+@keyframes bs-border-glow {
+  0%, 100% { box-shadow: inset 0 1px 0 rgba(255,220,100,.18), 0 0 28px rgba(247,166,13,.45), 0 20px 48px rgba(0,0,0,.60), 0 4px 12px rgba(0,0,0,.55); }
+  50%       { box-shadow: inset 0 1px 0 rgba(255,220,100,.28), 0 0 48px rgba(247,166,13,.72), 0 20px 48px rgba(0,0,0,.60), 0 4px 12px rgba(0,0,0,.55); }
+}
+@keyframes bs-particle-rise {
+  0%   { transform: translateY(0) scale(1);   opacity: .7; }
+  100% { transform: translateY(-70px) scale(0); opacity: 0; }
+}
+
+/* ── Wrapper ─────────────────────────────────────────────────── */
+.brand-showcase {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding: 40px 20px;
+  min-width: 0;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  animation: bs-float 8s ease-in-out infinite;
+}
+
+/* ── Radial ambient glow (behind tile) ───────────────────────── */
+.bs-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center,
+    rgba(247,166,13,.28) 0%,
+    rgba(200,110,0,.14) 35%,
+    transparent 68%
+  );
+  pointer-events: none;
+  animation: bs-glow-pulse 5s ease-in-out infinite;
+  z-index: 0;
+}
+
+/* ── Floating particles ──────────────────────────────────────── */
+.bs-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.bs-p {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(247,166,13,.55);
+  animation: bs-particle-rise linear infinite;
+}
+.bs-p1 { width: 4px;  height: 4px;  bottom: 30%; left: 22%; animation-duration: 7s;  animation-delay: 0s; }
+.bs-p2 { width: 3px;  height: 3px;  bottom: 20%; left: 72%; animation-duration: 9s;  animation-delay: 2s; }
+.bs-p3 { width: 5px;  height: 5px;  bottom: 40%; left: 85%; animation-duration: 11s; animation-delay: 1s; }
+.bs-p4 { width: 3px;  height: 3px;  bottom: 50%; left: 12%; animation-duration: 8s;  animation-delay: 3s; }
+
+/* ── Main brand tile ─────────────────────────────────────────── */
+.bs-tile {
+  position: relative;
+  z-index: 2;
+  width: 230px;
+  height: 230px;
+  border-radius: 38px;
+  background: linear-gradient(145deg, #3d1c06 0%, #1a0c04 38%, #080808 70%, #0d0d0d 100%);
+  border: 1.5px solid #c8870a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 28px 24px 24px;
+  box-sizing: border-box;
+  animation: bs-border-glow 4.5s ease-in-out infinite;
+  transition: transform .3s ease;
+}
+.bs-tile:hover {
+  transform: scale(1.03);
+}
+
+/* Inner top-edge highlight (light reflection) */
+.bs-tile-shine {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,230,130,.55), transparent);
+  border-radius: 50%;
+}
+
+/* ── Logo mark inside tile ───────────────────────────────────── */
+.bs-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.bs-logo-mark {
+  width: 76px;
+  height: 76px;
+  border-radius: 20px;
+  background: #ffffff;
+  color: #0d0d0d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 42px;
+  font-weight: 900;
+  letter-spacing: -.02em;
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,.08),
+    0 4px 18px rgba(0,0,0,.35),
+    0 0 20px rgba(255,235,160,.22);
+}
+
+/* ── Brand name inside tile ──────────────────────────────────── */
+.bs-brand-name {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #f5dfa0;
+  letter-spacing: .03em;
+  text-align: center;
+  text-shadow: 0 0 14px rgba(247,166,13,.50);
+  line-height: 1;
+}
+
+/* ── Thin divider inside tile ────────────────────────────────── */
+.bs-tile-divider {
+  width: 56px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(247,166,13,.55), transparent);
+  flex-shrink: 0;
+}
+
+/* ── Short tagline inside tile ───────────────────────────────── */
+.bs-tile-tagline {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255,255,255,.45);
+  letter-spacing: .06em;
+  text-align: center;
+  font-style: italic;
+}
+
+/* ── Typography block below tile ─────────────────────────────── */
+.bs-text-block {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  padding: 0 8px;
+}
+.bs-eyebrow {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .15em;
+  color: rgba(247,166,13,.80);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+}
+.bs-headline {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: rgba(255,255,255,.88);
+  margin: 0;
+}
+.bs-subline {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgba(255,255,255,.52);
+  margin: 0;
+  font-style: italic;
+}
+
+/* ── Light theme ─────────────────────────────────────────────── */
+:root[data-theme='light'] .bs-glow {
+  background: radial-gradient(circle at center,
+    rgba(160,80,0,.18) 0%,
+    rgba(120,60,0,.08) 35%,
+    transparent 68%
+  );
+}
+:root[data-theme='light'] .bs-p { background: rgba(130,65,0,.40); }
+:root[data-theme='light'] .bs-tile {
+  background: linear-gradient(145deg, #5c2e0a 0%, #2e1505 38%, #180d02 70%, #1a1008 100%);
+  border-color: #a0620a;
+}
+:root[data-theme='light'] .bs-brand-name  { color: #f5dfa0; }
+:root[data-theme='light'] .bs-tile-tagline { color: rgba(255,235,180,.45); }
+:root[data-theme='light'] .bs-eyebrow     { color: rgba(120,60,0,.82); }
+:root[data-theme='light'] .bs-headline    { color: rgba(255,250,240,.88); }
+:root[data-theme='light'] .bs-subline     { color: rgba(255,235,195,.55); }
+
+/* ── final-panel layout fix ── */
+/* Override styles.css which sets overflow:hidden and position:relative */
+.final-section .final-panel {
+  overflow: visible !important;
+  position: relative !important;      /* keep stacking context */
+  min-height: 0 !important;           /* let grid size it naturally */
+}
+/* The left column (form) must not overflow into showcase */
+.final-section .final-panel > div[data-reveal] {
+  min-width: 0;
+}
+
+/* Registration label color fix for light theme */
+.registration-grid label {
+  color: color-mix(in srgb, #fffaf4 84%, transparent) !important;
+}
+
+/* ── Suggestion Textarea ───────────────────────────────────────── */
+.registration-suggestion {
+  grid-column: 1 / -1;          /* full width in the grid */
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+.suggestion-label-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  flex-wrap: wrap;
+}
+.suggestion-optional {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .04em;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: rgba(255,255,255,.18);
+  border: 1px solid rgba(255,255,255,.30);
+  color: rgba(255,255,255,.70);
+  flex-shrink: 0;
+}
+.final-panel textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 100px;
+  max-height: 260px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.27);
+  background: rgba(255,255,255,.12) !important;
+  color: #fffaf4 !important;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.6;
+  transition: border-color .2s, box-shadow .2s;
+  box-sizing: border-box;
+}
+.final-panel textarea::placeholder {
+  color: #ddc3aa !important;
+}
+.final-panel textarea:focus {
+  outline: none;
+  border-color: rgba(255,255,255,.55) !important;
+  box-shadow: 0 0 0 3px rgba(255,255,255,.08);
+}
+.char-counter {
+  display: block;
+  text-align: right;
+  font-size: 11.5px;
+  color: rgba(255,255,255,.45);
+  margin-top: -2px;
+  transition: color .2s;
+}
+.char-counter--warn {
+  color: #ffb347 !important;
+}
+
+/* Dark-mode textarea overrides */
+:root[data-theme='dark'] .final-panel textarea {
+  background: rgba(255,255,255,.06) !important;
+  border-color: #515151 !important;
+  color: #f5f5f4 !important;
+}
+:root[data-theme='dark'] .final-panel textarea::placeholder {
+  color: #9b9b9b !important;
+}
+:root[data-theme='dark'] .final-panel textarea:focus {
+  border-color: #888 !important;
+  box-shadow: 0 0 0 3px rgba(255,255,255,.05);
+}
+:root[data-theme='dark'] .suggestion-optional {
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.18);
+  color: rgba(255,255,255,.55);
+}
+
+/* ── Success State ─────────────────────────────────────────────── */
+.registration-success {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 20px 22px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.13) !important;
+  border: 1px solid rgba(255,255,255,.26) !important;
+  margin-bottom: 8px;
+}
+.registration-success .success-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #a8f7c1;
+}
+.registration-success b {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #fff;
+}
+.registration-success small {
+  display: block;
+  font-size: 14px;
+  color: rgba(255,255,255,.75) !important;
+  line-height: 1.55;
+}
+:root[data-theme='dark'] .registration-success {
+  background: rgba(255,255,255,.07) !important;
+  border-color: #3d3d3d !important;
+}
+:root[data-theme='dark'] .registration-success .success-icon {
+  color: #6ee7a0;
+}
+
+/* ---- 7. FOUNDING TEAM SECTION – theme-aware ---- */
+.founding-section {
+  background: var(--page) !important;
+}
+.founding-inner {
+  border-top-color: var(--line) !important;
+}
+.founding-inner h2,
+.founding-inner > div > .eyebrow {
+  color: var(--ink) !important;
+}
+.founding-inner > div > p {
+  color: var(--muted) !important;
+}
+.founding-people article {
+  background: var(--card) !important;
+  border-color: var(--line) !important;
+}
+.founding-people article > span {
+  color: var(--page) !important;
+  background: var(--brown) !important;
+}
+.founding-people b {
+  color: var(--ink) !important;
+}
+.founding-people small {
+  color: var(--brown) !important;
+}
+.founding-people p {
+  color: var(--muted) !important;
+}
+.founding-people em {
+  color: var(--brown) !important;
+}
+
+/* ---- 8. FOOTER – theme-aware ---- */
+footer {
+  background: var(--page) !important;
+  border-top-color: var(--line) !important;
+}
+.footer-inner > div:first-child p {
+  color: var(--muted) !important;
+}
+.footer-links b {
+  color: var(--ink) !important;
+}
+.footer-links a,
+.footer-links button {
+  color: var(--muted) !important;
+}
+.footer-links a:hover,
+.footer-links button:hover {
+  color: var(--brown) !important;
+}
+.footer-disclaimer {
+  border-top-color: var(--line) !important;
+}
+.footer-disclaimer strong {
+  color: var(--ink) !important;
+}
+.footer-disclaimer p {
+  color: var(--muted) !important;
+}
+
+/* ---- 9. NAV – make sure no labels show ---- */
+.nav-context,
+.nav-access {
+  display: none !important;
+}
+
+/* ---- 10. HERO SECTION – theme-aware ---- */
+.hero {
+  background: var(--page) !important;
+}
+.browser-card {
+  color: var(--ink) !important;
+  background: var(--card) !important;
+  border-color: var(--line) !important;
+}
+.browser-top {
+  border-bottom-color: var(--line) !important;
+}
+.browser-top > span i {
+  background: var(--line) !important;
+}
+.browser-top b {
+  color: var(--muted) !important;
+}
+.browser-top small {
+  color: var(--faint) !important;
+}
+.browser-body h3 {
+  color: var(--ink) !important;
+}
+.browser-body nav > * {
+  color: var(--muted) !important;
+}
+.browser-body nav b {
+  color: var(--brown) !important;
+  border-bottom-color: var(--brown) !important;
+}
+.mock-content article {
+  background: var(--alt) !important;
+}
+.mock-content article > span {
+  color: var(--brown) !important;
+  background: var(--card) !important;
+  border-color: var(--line) !important;
+}
+.mock-content b {
+  color: var(--ink) !important;
+}
+.mock-content small {
+  color: var(--muted) !important;
+}
+.internship-float {
+  color: var(--ink) !important;
+  background: color-mix(in srgb, var(--card) 94%, transparent) !important;
+  border-color: var(--line) !important;
+}
+.opps-head span {
+  color: var(--brown) !important;
+}
+.opportunity-float article {
+  border-top-color: var(--line) !important;
+}
+.opportunity-float article > span {
+  color: var(--page) !important;
+  background: var(--brown) !important;
+}
+.opportunity-float b {
+  color: var(--ink) !important;
+}
+.opportunity-float small {
+  color: var(--muted) !important;
+}
+.opportunity-note {
+  color: var(--faint) !important;
+}
+
+/* ---- 11. ABOUT FEATURES SECTION (bento) – theme-aware ---- */
+.bento {
+  background: var(--card) !important;
+  border-color: var(--line) !important;
+  color: var(--ink) !important;
+}
+.tile-top h3 {
+  color: var(--ink) !important;
+}
+.tile-icon {
+  color: var(--brown) !important;
+  background: var(--alt) !important;
+}
+.bento > p {
+  color: var(--muted) !important;
+}
+
+/* ---- 12. GLOBAL LIGHT THEME – cream/warm brown palette ---- */
+/* The root variables already handle this via styles.css :root block.
+   These rules ensure no section has hardcoded overrides that bypass variables. */
+
+/* Light mode scrollbar */
+:root:not([data-theme='dark']) {
+  scrollbar-color: var(--tan) var(--alt);
+}
+:root[data-theme='dark'] {
+  scrollbar-color: #444 #111;
+}
+
+/* ---- 13. STICKY CTA – theme-aware ---- */
+.sticky-cta {
+  color: var(--ink) !important;
+  background: color-mix(in srgb, var(--card) 92%, transparent) !important;
+  border-top-color: var(--line) !important;
+}
+
+/* ---- 14. MODAL – theme-aware ---- */
+.modal-backdrop {
+  background: rgba(15,9,5,.52) !important;
+}
+:root[data-theme='dark'] .modal-backdrop {
+  background: rgba(0,0,0,.72) !important;
+}
+.modal {
+  color: var(--ink) !important;
+  background: var(--card) !important;
+  border-color: var(--line) !important;
+}
+.modal h2 {
+  color: var(--ink) !important;
+}
+.modal > p {
+  color: var(--muted) !important;
+}
+.close {
+  color: var(--muted) !important;
+  background: var(--alt) !important;
+}
+.modal input,
+.modal textarea {
+  color: var(--ink) !important;
+  background: var(--alt) !important;
+  border-color: var(--line) !important;
+}
+.legal-copy p {
+  color: var(--muted) !important;
+}
+
+/* ---- 15. TOAST – theme-aware ---- */
+.toast {
+  color: var(--ink) !important;
+  background: var(--card) !important;
+  border-color: var(--line) !important;
+}
+
+/* ---- 16. BACK TO TOP – always visible and themed ---- */
+.back-top {
+  color: var(--page) !important;
+  background: var(--brown) !important;
+}
+
+/* ---- 17. MARQUEE – theme-aware ---- */
+.marquee-wrap {
+  border-top-color: var(--line) !important;
+  border-bottom-color: var(--line) !important;
+}
+.marquee-track {
+  color: var(--muted) !important;
+}
+.marquee-track i {
+  color: var(--tan) !important;
+}
+
+/* ---- 18. HERO CHIPS – theme-aware ---- */
+.hero-chips span {
+  color: var(--muted) !important;
+  background: var(--card) !important;
+  border-color: var(--line) !important;
+}
+.hero-chips svg {
+  color: var(--brown) !important;
+}
+
+/* ---- 19. PROGRESS BAR – theme-aware ---- */
+.progress {
+  background: var(--brown) !important;
+}
+
+/* ---- 20. ABOUT ARC CARDS – VIBRANT NEON COLORS (both themes) ---- */
+/* Restore the original solid, saturated color treatment from the reference screenshot.
+   These colors apply in BOTH light and dark themes — the about-arc-section has its
+   own background that makes these always visible and rich. */
+
+/* Purple – Study Materials */
+.arc-card-study {
+  --accent: #c063ff;
+  --accent-rgb: 192,99,255;
+  --card-top: #8424e9;
+  --card-mid: #5a14b8;
+  --card-bottom: #2d0870;
+}
+/* Electric Blue – LOR & Resume */
+.arc-card-video {
+  --accent: #38a5ff;
+  --accent-rgb: 56,165,255;
+  --card-top: #1264e0;
+  --card-mid: #0a48a8;
+  --card-bottom: #052c6e;
+}
+/* Teal / Cyan – Skill Development */
+.arc-card-skills {
+  --accent: #32f7ef;
+  --accent-rgb: 50,247,239;
+  --card-top: #09b8b4;
+  --card-mid: #087d79;
+  --card-bottom: #04484a;
+}
+/* Orange / Amber – Internships & Jobs */
+.arc-card-internships {
+  --accent: #ffd33a;
+  --accent-rgb: 255,211,58;
+  --card-top: #f28a08;
+  --card-mid: #b05508;
+  --card-bottom: #5c2504;
+}
+/* Lime Green – Hackathons */
+.arc-card-hackathons {
+  --accent: #aaf32f;
+  --accent-rgb: 170,243,47;
+  --card-top: #64b40e;
+  --card-mid: #3a7d09;
+  --card-bottom: #1a3f04;
+}
+/* Magenta / Pink – Mentorship */
+.arc-card-mentorship {
+  --accent: #ff62b7;
+  --accent-rgb: 255,98,183;
+  --card-top: #d81874;
+  --card-mid: #920c50;
+  --card-bottom: #480328;
+}
+
+/* Solid rich gradient fill — no transparency on front face */
+.arc-card-front {
+  background: linear-gradient(
+    152deg,
+    var(--card-top) 0%,
+    var(--card-mid) 52%,
+    var(--card-bottom) 100%
+  ) !important;
+  /* Slight inner highlight at top to simulate depth */
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.44),
+    inset 0 -32px 46px rgba(0,0,0,.18) !important;
+}
+
+/* Neon border + outer glow — matches the reference screenshot */
+.arc-card-face {
+  border-color: var(--accent) !important;
+  border-width: 2px !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.44),
+    inset 0 -32px 46px rgba(0,0,0,.22),
+    0 0 8px  rgba(var(--accent-rgb), .82),
+    0 0 25px rgba(var(--accent-rgb), .40),
+    0 19px 30px rgba(17,8,28,.32) !important;
+}
+
+/* Inner border highlight ring */
+.arc-card-front::after {
+  border-color: rgba(255,255,255,.26) !important;
+}
+
+/* Vibrant card back — same accent palette */
+.arc-card-back {
+  background: linear-gradient(
+    148deg,
+    color-mix(in srgb, var(--card-top) 70%, #000) 0%,
+    color-mix(in srgb, var(--card-bottom) 85%, #000) 100%
+  ) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.28),
+    inset 0 0 26px rgba(var(--accent-rgb), .15),
+    0 0 20px rgba(var(--accent-rgb), .42),
+    0 16px 28px rgba(0,0,0,.48) !important;
+}
+
+/* White text — readable on all saturated backgrounds */
+.arc-card-front strong,
+.arc-card-back strong {
+  color: #fff !important;
+  text-shadow: 0 2px 6px rgba(0,0,0,.28) !important;
+}
+.arc-card-front small {
+  color: rgba(255,255,255,.92) !important;
+}
+.arc-back-heading small,
+.arc-back-copy,
+.arc-back-points > span {
+  color: rgba(255,255,255,.88) !important;
+}
+
+/* Icon glow */
+.arc-icon-shell {
+  border-color: rgba(255,255,255,.52) !important;
+  background: rgba(255,255,255,.14) !important;
+  box-shadow: 0 0 14px rgba(var(--accent-rgb), .55) !important;
+}
+.arc-icon-shell svg {
+  color: #fff !important;
+  filter: drop-shadow(0 0 6px rgba(var(--accent-rgb), .9)) !important;
+}
+
+/* Neon dots */
+.arc-card-dots i {
+  background: rgba(255,255,255,.9) !important;
+  box-shadow: 0 0 8px rgba(255,255,255,.8) !important;
+}
+.arc-card-dots i:nth-child(4),
+.arc-card-dots i:nth-child(5) {
+  opacity: .4 !important;
+}
+
+/* Neon accent lines on card front */
+.arc-card-lines i {
+  background: linear-gradient(90deg, rgba(255,255,255,.88), rgba(255,255,255,.12)) !important;
+  box-shadow: 0 0 6px rgba(255,255,255,.52) !important;
+}
+
+/* Back divider bar */
+.arc-back-divider {
+  background: linear-gradient(
+    90deg,
+    var(--accent),
+    rgba(255,255,255,.38),
+    transparent
+  ) !important;
+  box-shadow: 0 0 8px rgba(var(--accent-rgb), .85) !important;
+}
+
+/* Hover / active: scale up glow */
+.arc-card.is-active .arc-card-button,
+.arc-card-button:focus-visible {
+  filter: drop-shadow(0 20px 18px rgba(var(--accent-rgb), .40)) !important;
+}
+
+/* Back heading icon */
+.arc-back-heading > svg {
+  color: var(--accent) !important;
+  filter: drop-shadow(0 0 4px rgba(var(--accent-rgb), .9)) !important;
+}
+
+/* Back label */
+.arc-back-label {
+  color: rgba(255,255,255,.72) !important;
+  text-shadow: 0 0 7px rgba(var(--accent-rgb), .9) !important;
+}
+
+/* Connecting arc paths keep their neon colors — no override needed.
+   They are set by polish.css path-* classes and are already correct. */
+
+/* ---- 21. ABOUT ARC HUB ORBITS – perfectly centered ellipses ---- */
+/* The arc-hub-orbits SVG is now positioned by updates.css.
+   We only fix the ellipse stroke colors here. */
+.arc-hub-orbits ellipse {
+  fill: none;
+  stroke-width: 1.2;
+  opacity: .55;
+}
+.arc-hub-orbits ellipse:nth-child(2) { opacity: .44; }
+.arc-hub-orbits ellipse:nth-child(3) { opacity: .32; }
+.arc-hub-orbits ellipse:nth-child(4) { opacity: .22; }
+
+/* Make sure arc-hub-orbits SVG sits correctly below the platform */
+.arc-hub-orbits {
+  width: 540px;
+  height: 160px;
+  position: absolute;
+  z-index: 0;
+  bottom: -42px;
+  left: 50%;
+  translate: -50% 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+/* ---- 22. PRICING NOTE – theme-aware ---- */
+.pricing-note {
+  color: var(--muted) !important;
+}
+.pricing-note svg {
+  color: var(--brown) !important;
+}
+
+/* ---- 23. MOBILE MENU – theme-aware ---- */
+.mobile-menu {
+  background: var(--page) !important;
+  color: var(--ink) !important;
+}
+.mobile-menu nav button {
+  color: var(--ink) !important;
+  border-bottom-color: var(--line) !important;
+}
+.mobile-menu nav button svg {
+  color: var(--brown) !important;
+}
+.mobile-menu > div:first-child > button {
+  color: var(--muted) !important;
+  background: var(--alt) !important;
+}
+
+/* ---- 24. SECTION ALT BACKGROUND – theme-aware ---- */
+.section-alt {
+  border-top-color: var(--line) !important;
+  border-bottom-color: var(--line) !important;
+}
+
+/* ---- 25. ABOUT ARC SECTION – remove forced dark background ---- */
+/* Override the dark backgrounds from polish.css that have been cascading */
+.about-arc-section .about-arc-visual .arc-card-face {
+  /* Keep accent-based styling, not hardcoded dark */
+}

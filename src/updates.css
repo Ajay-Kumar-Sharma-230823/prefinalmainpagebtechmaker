@@ -1,0 +1,146 @@
+/* Final platform update: all revised sections consume the same theme tokens. */
+:root {
+  --accent: #6b4226;
+  --accent-soft: color-mix(in srgb, var(--brown) 12%, var(--card));
+  --on-strong: #fffaf4;
+  --strong-surface: #3a2616;
+}
+
+:root[data-theme='dark'] {
+  --accent: #f4f4f1;
+  --accent-soft: #242424;
+  --on-strong: #0a0a0a;
+  --strong-surface: #171717;
+}
+
+.nav-context,
+.nav-access { display: none !important; }
+
+/* The former roadmap card is intentionally removed; this card only lists
+   source organisations and never represents availability or application status. */
+.roadmap-float { display: none !important; }
+.internship-float { width: min(268px, 88%); padding: 14px; right: -8px; bottom: -12px; color: var(--ink); background: color-mix(in srgb, var(--card) 94%, transparent); border-color: var(--line); backdrop-filter: blur(14px); }
+.internship-float .opps-head { margin-bottom: 7px; }
+.internship-float .opps-head span { color: var(--brown); font-weight: 700; letter-spacing: .075em; }
+.internship-float article { min-height: 36px; }
+.internship-float .opportunity-logo { width: 23px; height: 23px; flex: 0 0 auto; display: grid; place-items: center; color: var(--page); background: var(--brown); border-radius: 7px; font: 700 10px/1 'DM Mono', monospace; }
+.internship-float .opportunity-logo svg { width: 12px; height: 12px; }
+.opportunity-note { display: block; margin-top: 7px; color: var(--faint); font-size: 8px; line-height: 1.3; }
+
+/* The orbital paths are now actual SVG ellipses with one common centre. */
+.arc-hub::before,
+.arc-hub::after,
+.arc-hub-orbit { display: none; }
+.arc-hub-orbits { width: 440px; height: 150px; position: absolute; z-index: 0; bottom: -39px; left: 50%; overflow: visible; translate: -50% 0; pointer-events: none; }
+.arc-hub-orbits ellipse { fill: none; stroke: var(--brown); stroke-width: 1.1; opacity: .52; }
+.arc-hub-orbits ellipse:nth-child(2) { opacity: .42; }.arc-hub-orbits ellipse:nth-child(3) { opacity: .31; }.arc-hub-orbits ellipse:nth-child(4) { opacity: .22; }
+.arc-hub-platform { background: radial-gradient(ellipse, color-mix(in srgb, var(--brown) 75%, #000) 0 24%, var(--strong-surface) 70%) !important; border-color: var(--brown) !important; box-shadow: inset 0 8px 13px color-mix(in srgb, var(--brown) 30%, transparent), 0 12px 14px color-mix(in srgb, var(--ink) 24%, transparent), 0 0 19px color-mix(in srgb, var(--brown) 34%, transparent) !important; }
+.arc-hub-core { color: var(--on-strong); background: linear-gradient(160deg, color-mix(in srgb, var(--brown) 76%, #000), var(--strong-surface) 70%) !important; border-color: var(--brown) !important; box-shadow: inset 0 0 26px color-mix(in srgb, var(--brown) 30%, transparent), 0 12px 22px color-mix(in srgb, var(--ink) 30%, transparent) !important; }
+.arc-hub-mark { color: var(--page); background: var(--brown); box-shadow: none; }
+
+/* Warm, light-mode about section; dark mode derives the same geometry from its tokens. */
+.about-arc-section { --arc-ink: var(--ink); --arc-muted: var(--muted); background: radial-gradient(circle at 50% 100%, color-mix(in srgb, var(--tan) 18%, transparent), transparent 38%), var(--page) !important; }
+.about-arc-heading h2, .about-arc-kicker { color: var(--ink) !important; text-shadow: none !important; }
+.about-arc-heading h2 em { color: var(--brown); background: none; -webkit-text-fill-color: currentColor; }
+.about-arc-section::before { opacity: .34 !important; background-image: linear-gradient(90deg, color-mix(in srgb, var(--brown) 10%, transparent) 1px, transparent 1px), linear-gradient(color-mix(in srgb, var(--brown) 8%, transparent) 1px, transparent 1px) !important; }
+/* ── VIBRANT NEON CARD COLORS ─────────────────────────────── */
+.arc-card-study    { --accent:#c063ff; --accent-rgb:192,99,255;  --card-top:#8424e9; --card-mid:#5a14b8; --card-bottom:#2d0870; }
+.arc-card-video    { --accent:#38a5ff; --accent-rgb:56,165,255;  --card-top:#1264e0; --card-mid:#0a48a8; --card-bottom:#052c6e; }
+.arc-card-skills   { --accent:#32f7ef; --accent-rgb:50,247,239;  --card-top:#09b8b4; --card-mid:#087d79; --card-bottom:#04484a; }
+.arc-card-internships { --accent:#ffd33a; --accent-rgb:255,211,58; --card-top:#f28a08; --card-mid:#b05508; --card-bottom:#5c2504; }
+.arc-card-hackathons  { --accent:#aaf32f; --accent-rgb:170,243,47; --card-top:#64b40e; --card-mid:#3a7d09; --card-bottom:#1a3f04; }
+.arc-card-mentorship  { --accent:#ff62b7; --accent-rgb:255,98,183; --card-top:#d81874; --card-mid:#920c50; --card-bottom:#480328; }
+
+.arc-card-face {
+  border-color: var(--accent) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.18),
+    0 0 8px  rgba(var(--accent-rgb),.82),
+    0 0 25px rgba(var(--accent-rgb),.40),
+    0 15px 26px rgba(0,0,0,.55) !important;
+}
+.arc-card-front { background: linear-gradient(153deg, var(--card-top), var(--card-mid) 54%, var(--card-bottom)) !important; }
+.arc-card-front::after { border-color: rgba(var(--accent-rgb),.35); }
+.arc-card-front strong, .arc-card-back strong { color: #fff !important; text-shadow: 0 1px 4px rgba(0,0,0,.5); }
+.arc-card-front small, .arc-back-heading small, .arc-back-copy, .arc-back-points > span { color: rgba(255,255,255,.85) !important; }
+.arc-card-dots i:nth-child(1), .arc-card-dots i:nth-child(2) { background: rgba(255,255,255,.75); }
+.arc-card-back { background: linear-gradient(150deg, var(--card-mid), var(--card-bottom) 78%) !important; }
+.arc-back-divider { background: linear-gradient(90deg, var(--accent), rgba(var(--accent-rgb),.20), transparent); box-shadow: 0 0 6px rgba(var(--accent-rgb),.55); }
+.arc-card-video .arc-card-back { padding: 16px 13px 13px; }.arc-card-video .arc-back-divider { margin: 10px 0 8px; }.arc-card-video .arc-back-copy { margin-bottom: 8px; font-size: 9px; }.arc-card-video .arc-back-points { gap: 6px; }.arc-card-video .arc-back-points > span { font-size: 8.5px; }
+
+/* Remove fixed-black blocks from the guidance and founder sections. */
+.ai-guidance-section { background: radial-gradient(circle at 87% 14%, color-mix(in srgb, var(--tan) 25%, transparent), transparent 25%), var(--page) !important; }
+.ai-guidance-badge { color: var(--page) !important; background: var(--brown) !important; box-shadow: 0 8px 18px color-mix(in srgb, var(--ink) 13%, transparent); }
+.ai-guidance-badge svg, .ai-guidance-copy h2, .ai-action-copy strong, .ai-feature-card strong { color: var(--ink) !important; }
+.ai-guidance-copy h2 em { color: var(--page) !important; background: var(--brown) !important; border-color: var(--brown) !important; }
+.ai-guidance-copy > p, .ai-action-copy > span { color: var(--muted) !important; }
+.ai-guidance-action { color: var(--ink) !important; background: var(--card) !important; border-color: var(--line) !important; box-shadow: 0 7px 15px color-mix(in srgb, var(--ink) 5%, transparent) !important; }
+.ai-guidance-action:hover, .ai-guidance-action.is-active { background: var(--alt) !important; border-color: var(--tan) !important; }
+.ai-action-icon { color: var(--brown) !important; background: var(--alt) !important; }
+.ai-guidance-action.is-active .ai-action-icon { color: var(--page) !important; background: var(--brown) !important; }
+.ai-action-copy small, .ai-action-arrow { color: var(--faint) !important; }
+.ai-step-detail-list { background: var(--alt) !important; border-color: var(--line) !important; box-shadow: none !important; }
+.ai-step-detail-list > span, .ai-step-detail-list svg { color: var(--muted) !important; }
+.ai-workspace::before { background: radial-gradient(circle at 54% 22%, color-mix(in srgb, var(--card) 95%, transparent), transparent 69%) !important; }
+.ai-feature-connection { color: var(--brown) !important; opacity: .55; }.ai-feature-connection circle { stroke: var(--page) !important; }
+.ai-feature-card { color: var(--ink) !important; background: var(--card) !important; border-color: var(--line) !important; box-shadow: 0 13px 23px color-mix(in srgb, var(--ink) 9%, transparent) !important; }
+.ai-desk-frame { background: var(--card) !important; border-color: var(--line) !important; box-shadow: 0 18px 31px color-mix(in srgb, var(--ink) 12%, transparent) !important; }
+
+.mentor-cinematic-section { color: var(--ink) !important; background: radial-gradient(ellipse at 50% 100%, color-mix(in srgb, var(--tan) 25%, transparent), transparent 43%), var(--alt) !important; }
+.mentor-cinematic-section::before, .mentor-cinematic-section::after { border-color: color-mix(in srgb, var(--brown) 36%, transparent) !important; opacity: .45; }
+.mentor-cinematic-hero { background: var(--strong-surface) !important; border-color: var(--line) !important; }
+.mentor-cinematic-hero::after { background: linear-gradient(90deg, color-mix(in srgb, var(--strong-surface) 96%, transparent), color-mix(in srgb, var(--strong-surface) 86%, transparent) 34%, color-mix(in srgb, var(--strong-surface) 25%, transparent) 63%, transparent) !important; }
+.mentor-hero-badge { color: var(--on-strong) !important; border-color: color-mix(in srgb, var(--on-strong) 65%, transparent) !important; }
+.mentor-hero-copy h2 { color: var(--on-strong) !important; }.mentor-hero-copy p { color: color-mix(in srgb, var(--on-strong) 75%, transparent) !important; }
+.mentor-profile-card { color: var(--ink) !important; background: var(--card) !important; border-color: var(--line) !important; box-shadow: var(--soft) !important; }
+.mentor-profile-photo { background: var(--alt) !important; }.mentor-profile-role { color: var(--brown) !important; border-color: var(--line) !important; background: var(--accent-soft); }
+.mentor-profile-content h3 { color: var(--ink) !important; }.mentor-profile-content p { color: var(--muted) !important; }
+.mentor-recognition { margin: -1px 0 9px; color: var(--brown); font: 600 10px/1.25 'DM Mono', monospace; letter-spacing: .025em; text-transform: uppercase; }
+.mentor-profile-tags span { color: var(--brown) !important; background: var(--accent-soft) !important; border: 1px solid color-mix(in srgb, var(--brown) 15%, var(--line)); }
+.mentor-cinematic-section .mentor-request { color: var(--brown) !important; border-color: var(--brown) !important; }.mentor-cinematic-section .mentor-request:hover { color: var(--page) !important; background: var(--brown) !important; border-color: var(--brown) !important; }
+.mentor-value-strip article { border-color: var(--line) !important; }.mentor-value-icon { color: var(--brown) !important; border-color: var(--line) !important; background: var(--card); }
+.mentor-value-strip strong { color: var(--ink) !important; }.mentor-value-strip small { color: var(--muted) !important; }
+
+/* Two plans, a full registration form, legal content, and richer team cards. */
+.two-plan-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 840px; align-items: stretch; }
+.plan-card { min-height: 0; }.plan-card.pro { color: var(--on-strong); background: var(--strong-surface); border-color: var(--strong-surface); transform: translateY(-8px); }
+.plan-card.pro .eyebrow, .plan-card.pro > p, .plan-card.pro li { color: color-mix(in srgb, var(--on-strong) 75%, transparent) !important; }.plan-card.pro .button-primary { color: var(--strong-surface); background: var(--on-strong); }.plan-card.pro li svg { color: var(--on-strong); }
+
+/* ── Registration panel: two-column layout (form | brand showcase) ── */
+.final-panel {
+  display: grid !important;
+  grid-template-columns: 1fr minmax(0, 420px) !important;
+  align-items: center !important;
+  gap: 60px !important;
+  overflow: visible !important;   /* allow showcase to breathe */
+}
+.registration-grid { max-width: 700px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 25px; }
+.registration-grid label { display: grid; gap: 6px; color: color-mix(in srgb, var(--on-strong) 84%, transparent); font-size: 12px; font-weight: 700; }.registration-grid .registration-email { grid-column: 1 / -1; }
+.final-panel form { max-width: 700px; display: block; }.final-panel form .button { margin-top: 15px; }.final-panel input { width: 100%; min-width: 0; color: var(--on-strong); background: color-mix(in srgb, var(--on-strong) 10%, transparent); border-color: color-mix(in srgb, var(--on-strong) 25%, transparent); }.final-panel .form-error { display: block; margin-top: 11px; color: #ffd1c9; }
+.founding-people { gap: 16px; }.founding-people article { min-height: 208px; padding: 18px; align-items: flex-start; background: var(--card); border: 1px solid var(--line); border-radius: 17px; box-shadow: 0 10px 22px color-mix(in srgb, var(--ink) 5%, transparent); transition: transform .2s ease, box-shadow .2s ease; }.founding-people article:hover { transform: translateY(-3px); box-shadow: var(--soft); }.founding-people article > span { width: 48px; height: 48px; border-radius: 14px; }.founding-people article > div { min-width: 0; }.founding-people b { font-size: 17px; }.founding-people small { color: var(--brown); font-size: 12px; font-weight: 700; }.founding-people p { margin: 13px 0 10px; color: var(--muted); font-size: 12px; line-height: 1.45; }.founding-people em { display: block; color: var(--brown); font-size: 11px; font-style: normal; font-weight: 700; line-height: 1.35; }
+.footer-links button { display: block; margin-top: 8px; padding: 0; color: var(--muted); background: transparent; font-size: 13px; text-align: left; }.footer-links button:hover { color: var(--brown); }.footer-disclaimer { padding: 22px 0; }.footer-disclaimer strong { color: var(--ink); font-size: 13px; }.footer-disclaimer p { max-width: 1100px; margin: 7px 0 0; color: var(--muted); font-size: 11px; line-height: 1.45; }
+.legal-backdrop { z-index: 110; }.legal-modal { max-height: min(760px, calc(100dvh - 40px)); overflow: auto; }.legal-copy { display: grid; gap: 13px; }.legal-copy p { margin: 0; font-size: 14px; line-height: 1.55; }
+
+@media (max-width: 800px) {
+  .internship-float { right: -2px; bottom: -10px; }
+  .two-plan-grid { grid-template-columns: 1fr; max-width: 560px; }.plan-card.pro { transform: none; }
+  .registration-grid { grid-template-columns: 1fr; }.registration-grid .registration-email { grid-column: auto; }
+  .founding-people { grid-template-columns: 1fr; }.founding-people article { min-height: 0; }
+  /* Stack the brand showcase below the form on mobile */
+  .final-panel { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .brand-showcase { max-width: 300px; padding: 24px 16px; gap: 24px; }
+  .bs-tile { width: 180px; height: 180px; border-radius: 30px; gap: 10px; padding: 22px 20px 20px; }
+  .bs-logo-mark { width: 60px; height: 60px; font-size: 34px; border-radius: 16px; }
+  .bs-brand-name { font-size: 13px; }
+  .bs-headline { font-size: 16px; }
+  .bs-glow { width: 240px; height: 240px; }
+  /* Reduce particle effects on mobile */
+  .bs-p3, .bs-p4 { display: none; }
+}
+
+@media (max-width: 560px) {
+  .internship-float { width: min(258px, 88%); padding: 11px; }
+  .arc-hub-orbits { scale: .76; transform-origin: center bottom; }
+  .registration-grid { margin-top: 20px; gap: 10px; }.final-panel form .button { width: 100%; }
+  .founding-people article { padding: 15px; }.founding-people article > span { width: 42px; height: 42px; }.founding-people b { font-size: 15px; }
+}
